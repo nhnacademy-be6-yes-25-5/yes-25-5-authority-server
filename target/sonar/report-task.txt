@@ -1,0 +1,6 @@
+projectKey=yes-25-5-authority
+serverUrl=http://133.186.241.167:9000
+serverVersion=10.5.1.90531
+dashboardUrl=http://133.186.241.167:9000/dashboard?id=yes-25-5-authority
+ceTaskId=e1f78c06-da78-43be-af07-854147d7c60a
+ceTaskUrl=http://133.186.241.167:9000/api/ce/task?id=e1f78c06-da78-43be-af07-854147d7c60a
