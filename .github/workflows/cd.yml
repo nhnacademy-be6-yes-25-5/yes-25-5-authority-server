@@ -89,7 +89,7 @@ jobs:
             const payload = {
               botName: "인증 서버 Bot",
               botIconImage: "https://www.tistory.com/favicon.ico",
-              text: "인증 서버의 배포가 실패했습니다...",
+              text: "인증서버의 배포가 실패했습니다...",
               attachments: [
                 {
                   title: "Pull Request URL",
