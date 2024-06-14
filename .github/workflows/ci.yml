@@ -70,7 +70,7 @@ jobs:
           script: |
             const webhookUrl = process.env.DOORAY_WEBHOOK_URL;
             const payload = {
-              botName: "인증 서버 상희 Bot",
+              botName: "인증 서버 Bot",
               botIconImage: "https://www.tistory.com/favicon.ico",
               text: "인증 서버의 Pull Request가 성공적으로 올라갔어요!",
               attachments: [
