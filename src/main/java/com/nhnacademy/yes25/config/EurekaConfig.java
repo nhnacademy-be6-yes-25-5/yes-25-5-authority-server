@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableDiscoveryClient
-@ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "false", matchIfMissing = true)
 public class EurekaConfig {
 }
