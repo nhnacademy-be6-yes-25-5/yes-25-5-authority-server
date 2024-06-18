@@ -2,7 +2,7 @@ spring:
   application:
     name: authority-server
   profiles:
-    active: ci
+    active: 1
 eureka:
   client:
     enabled: false
