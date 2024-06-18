@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: authority-server
+  profiles:
+    active: 1
+eureka:
+  client:
+    enabled: false
+    fetchRegistry: false
+    registerWithEureka: false
+
+  instance:
+    preferIpAddress: true
