@@ -6,11 +6,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "BOOK-USER-SERVER")
+@FeignClient(name = "BOOK-USER-SERVER", url = "http://localhost:8061")
 public interface UserAdaptor {
 
     @PostMapping("/users")
-    LoginUserResponse findById(@RequestBody String id);
+    LoginUserResponse findById(@RequestBody LoginUserRequest loginUserRequest);
 
     @PostMapping("/auth/login")
     LoginUserResponse findByEmailAndPassword(@RequestBody LoginUserRequest loginUserRequest);

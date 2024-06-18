@@ -2,6 +2,7 @@ package com.nhnacademy.yes25.application.service.impl;
 
 import com.nhnacademy.yes25.infrastructure.adaptor.UserAdaptor;
 import com.nhnacademy.yes25.presentation.dto.CustomUserDetails;
+import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +21,11 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        LoginUserResponse userData = userAdaptor.findById(username);
+        LoginUserRequest request = LoginUserRequest.builder()
+                .email(username)
+                .build();
+
+        LoginUserResponse userData = userAdaptor.findById(request);
 
         if (userData != null) {
             return new CustomUserDetails(userData);

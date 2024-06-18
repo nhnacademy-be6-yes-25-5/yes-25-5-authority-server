@@ -1,3 +1,6 @@
 package com.nhnacademy.yes25.presentation.dto.request;
 
-public record LoginUserRequest(String email, String password) { }
+import lombok.Builder;
+
+@Builder
+public record LoginUserRequest(String email) { }

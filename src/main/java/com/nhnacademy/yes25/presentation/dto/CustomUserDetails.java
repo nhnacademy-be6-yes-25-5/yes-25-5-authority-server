@@ -68,6 +68,6 @@ public class CustomUserDetails implements UserDetails {
 
         String status = loginUserResponse.loginStatusName();
 
-        return "정상".equals(status);
+        return "active".equalsIgnoreCase(status);
     }
 }
