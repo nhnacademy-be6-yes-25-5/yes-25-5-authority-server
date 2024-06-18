@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Maven project in Docker
         run: |
-          docker run --rm -v "$(pwd)":/app -w /app my-app-ci mvn package
+          docker run --rm -v "$(pwd)":/app -w /app my-app-ci mvn package \
           -Dspring.profiles.active=ci
 
       - name: Check if JAR file exists
