@@ -23,9 +23,10 @@ public class CustomUserDetailService implements UserDetailsService {
 
         LoginUserRequest request = LoginUserRequest.builder()
                 .email(username)
+                .password("temp")
                 .build();
 
-        LoginUserResponse userData = userAdaptor.findById(request);
+        LoginUserResponse userData = userAdaptor.findLoginUserByEmail(request);
 
         if (userData != null) {
             return new CustomUserDetails(userData);

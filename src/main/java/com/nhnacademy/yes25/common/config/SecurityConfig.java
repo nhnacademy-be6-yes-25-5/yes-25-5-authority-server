@@ -1,6 +1,7 @@
 package com.nhnacademy.yes25.common.config;
 
 import com.nhnacademy.yes25.common.filter.LoginFilter;
+import com.nhnacademy.yes25.common.provider.JWTUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,9 +18,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    public final JWTUtil jwtUtil;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
@@ -38,18 +41,18 @@ public class SecurityConfig {
         http
                 .csrf(auth -> auth.disable());
 //        http
-//                .formLogin(auth -> auth.loginPage("/login"));
+//                .formLogin(auth -> auth.loginPage("/auth/login"));
         http
                 .formLogin(auth -> auth.disable());
         http
                 .httpBasic(auth -> auth.disable());
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/join ").permitAll()
-                        .anyRequest().authenticated());
+                        .requestMatchers("/login").permitAll());
 
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

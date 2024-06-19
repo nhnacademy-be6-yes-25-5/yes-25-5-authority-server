@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserAdaptor {
 
     @PostMapping("/users")
-    LoginUserResponse findById(@RequestBody LoginUserRequest loginUserRequest);
+    LoginUserResponse findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest);
 
     @PostMapping("/auth/login")
     LoginUserResponse findByEmailAndPassword(@RequestBody LoginUserRequest loginUserRequest);

@@ -3,6 +3,8 @@ spring:
     name: authority-server
   profiles:
     active: 1
+  jwt:
+    secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
 eureka:
   client:
     enabled: false
