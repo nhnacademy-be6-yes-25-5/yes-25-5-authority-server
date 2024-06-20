@@ -1,6 +1,8 @@
 spring:
   application:
     name: authority-server
+  jwt:
+    secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
 eureka:
   client:
     enabled: false
