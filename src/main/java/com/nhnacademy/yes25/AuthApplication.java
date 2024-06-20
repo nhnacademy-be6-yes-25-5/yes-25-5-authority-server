@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 @ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "true", matchIfMissing = true)
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class AuthApplication {
 
     public static void main(String[] args) {
