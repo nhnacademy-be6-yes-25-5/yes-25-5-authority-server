@@ -59,7 +59,7 @@ jobs:
             docker build -t authority-app .
             docker stop authority-app || true
             docker rm authority-app || true
-            docker run -d -p 8051:8051 --name authority-app authority-app --spring.profiles.active=prod
+            docker run -d -p 8051:8051 --name authority-app authority-app java -jar -Dspring.profiles.active=prod authority-server-1.0-SNAPSHOT.jar
           EOF
 
       - name: Send Deployment Status to Dooray
