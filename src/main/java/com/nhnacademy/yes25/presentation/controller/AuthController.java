@@ -5,7 +5,6 @@ import com.nhnacademy.yes25.common.provider.JWTUtil;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +26,10 @@ public class AuthController {
      * 사용자를 인증하고 인증된 사용자에 대한 JSON Web Token(JWT)을 생성합니다.
      *
      * @param loginUserRequest 사용자의 이메일과 비밀번호를 포함하는 로그인 요청
-     * @return 인증된 사용자 정보와 생성된 JWT가 포함된 Authorization 헤더가 포함된 ResponseEntity
+     * @return 생성된 JWT 토큰
      */
     @PostMapping("/login")
-    public ResponseEntity<Object> findUser(@RequestBody LoginUserRequest loginUserRequest) {
+    public ResponseEntity<String> findUser(@RequestBody LoginUserRequest loginUserRequest) {
         LoginUserResponse user = userService.findUserByEmailAndPassword(loginUserRequest);
 
         String jwt = jwtUtil.createJwt(
@@ -39,11 +38,6 @@ public class AuthController {
                 user.loginStatusName()
         );
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + jwt);
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(user);
+        return ResponseEntity.ok(jwt);
     }
 }
