@@ -1,0 +1,12 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    name: authority-server-1
+
+eureka:
+  gateway: http://localhost:8085
+
+jwt:
+  secret: dsfsjfhsajkfhjdfhfkjsafjklad
