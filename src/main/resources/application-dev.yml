@@ -1,11 +1,9 @@
 server:
   port: 8050
+
+spring:
+  application:
+    name: authority-server-1
+
 eureka:
-  client:
-    enabled: true
-    fetchRegistry: true
-    registerWithEureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-      instance:
-        preferIpAddress: true
+  gateway: http://localhost:8085
