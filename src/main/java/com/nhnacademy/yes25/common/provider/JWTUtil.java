@@ -18,16 +18,16 @@ import java.util.Date;
 @Component
 public class JWTUtil {
 
-    private SecretKey secretKey;
+    private final SecretKey secretKey;
     private static final long JWT_EXPIRATION_MS = 30 * 60 * 1000; // 30분
 
     /**
      * 제공된 비밀 키를 사용하여 JWTUtil 인스턴스를 생성합니다.
      *
-     * @param secret JWT 토큰 서명 및 검증에 사용되는 비밀 키
+     * @param jwtSecret JWT 토큰 서명 및 검증에 사용되는 비밀 키
      */
-    public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
-        secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+    public JWTUtil(@Value("${jwt.secret}") String jwtSecret) {
+        secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
     /**
