@@ -29,7 +29,7 @@ public class AuthController {
      * @return 생성된 JWT 토큰
      */
     @PostMapping("/login")
-    public ResponseEntity<String> findUser(@RequestBody LoginUserRequest loginUserRequest) {
+    public ResponseEntity<String>  findUser(@RequestBody LoginUserRequest loginUserRequest) {
         LoginUserResponse user = userService.findUserByEmailAndPassword(loginUserRequest);
 
         String jwt = jwtUtil.createJwt(
