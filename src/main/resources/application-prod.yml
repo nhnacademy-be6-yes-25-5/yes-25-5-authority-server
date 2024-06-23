@@ -6,4 +6,4 @@ spring:
     name: front-server-1
 
 eureka:
-  gateway: http://${EUREKA_SERVER_HOSTNAME}:${EUREKA_GATEWAY_PORT}
+  gateway: http://133.186.153.195:8761
