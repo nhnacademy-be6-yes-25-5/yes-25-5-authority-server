@@ -19,7 +19,8 @@ import java.util.Date;
 public class JWTUtil {
 
     private final SecretKey secretKey;
-    private static final long JWT_EXPIRATION_MS = 30 * 60 * 1000; // 30분
+    @Value("${jwt.expiration-ms}")
+    private static long JWT_EXPIRATION_MS; // 30분
 
     /**
      * 제공된 비밀 키를 사용하여 JWTUtil 인스턴스를 생성합니다.
