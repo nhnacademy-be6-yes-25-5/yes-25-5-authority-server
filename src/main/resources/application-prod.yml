@@ -1,12 +1,16 @@
 server:
-  port: 8051
+  port: 8050
 
 spring:
   application:
     name: authority-server
 
 eureka:
-  gateway: http://133.186.153.195:8761
+  client:
+    serviceUrl:
+      defaultZone: http://133.186.153.195:8761/eureka/
+  instance:
+    preferIpAddress: true
 
 api:
   book-user: http://133.186.153.195:8060
