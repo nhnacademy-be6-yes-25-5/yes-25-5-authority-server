@@ -7,10 +7,11 @@ spring:
 
 eureka:
   client:
+    enabled: true
+    fetchRegistry: true
+    registerWithEureka: true
     serviceUrl:
       defaultZone: http://133.186.153.195:8761/eureka/
-  instance:
-    preferIpAddress: true
 
 api:
   book-user: http://133.186.153.195:8060
