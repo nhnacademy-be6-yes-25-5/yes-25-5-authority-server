@@ -9,4 +9,4 @@ eureka:
   gateway: http://localhost:8085
 
 api:
-  book-user: http://localhost:8061
+  book-user: http://localhost:8085

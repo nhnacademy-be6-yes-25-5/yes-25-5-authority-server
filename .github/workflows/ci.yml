@@ -38,13 +38,6 @@ jobs:
         run: |
           docker run --rm -v "$(pwd)":/app -w /app authority-app mvn package \
           -Dspring.profiles.active=ci
-          
-          
-          
-          
-          
-          
-          
 
       - name: Check if JAR file exists
         run: |
