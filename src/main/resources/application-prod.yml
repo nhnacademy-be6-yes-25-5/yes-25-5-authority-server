@@ -14,4 +14,4 @@ eureka:
       defaultZone: http://${EUREKA_SERVER_HOSTNAME}:${EUREKA_SERVER_PORT}/eureka/
 
 api:
-  book-user: ${EUREKA_SERVER_HOSTNAME}:8060
+  book-user: http://${EUREKA_SERVER_HOSTNAME}:8060
