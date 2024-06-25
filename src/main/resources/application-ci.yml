@@ -1,13 +1,12 @@
+server:
+  port: 8051
+
 spring:
   application:
     name: authority-server
-eureka:
-  client:
-    enabled: false
-    fetchRegistry: false
-    registerWithEureka: false
 
-  instance:
-    preferIpAddress: true
-server:
-  port: 8050
+eureka:
+  gateway: http://localhost:8085
+
+api:
+  book-user: http://localhost:8085
