@@ -5,6 +5,7 @@ import com.nhnacademy.yes25.common.provider.JWTUtil;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final UserService userService;
@@ -29,9 +31,9 @@ public class AuthController {
      * @return 생성된 JWT 토큰
      */
     @PostMapping("/login")
-    public ResponseEntity<String>  findUser(@RequestBody LoginUserRequest loginUserRequest) {
-        LoginUserResponse user = userService.findUserByEmailAndPassword(loginUserRequest);
+    public ResponseEntity<String> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
 
+        LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
         String jwt = jwtUtil.createJwt(
                 user.userId(),
                 user.userRole(),
@@ -40,4 +42,10 @@ public class AuthController {
 
         return ResponseEntity.ok(jwt);
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> tokenTest(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(token);
+    }
+
 }

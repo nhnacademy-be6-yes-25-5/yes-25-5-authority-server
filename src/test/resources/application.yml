@@ -9,4 +9,5 @@ eureka:
   gateway: http://localhost:8085
 
 jwt:
-  secret: dsfsjfhsajkfhjdfhfkjsafjklad
+  secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
+  expiration-ms: 1800000

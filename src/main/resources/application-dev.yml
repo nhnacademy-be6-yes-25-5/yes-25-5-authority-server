@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: authority-server-1
+    name: authority-server
 
 eureka:
   gateway: http://localhost:8085
