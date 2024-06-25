@@ -23,15 +23,15 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t authority-app .
+          docker build --no-cache -t authority-app .
 
       - name: Run Maven tests in Docker
         run: |
           docker run --rm authority-app mvn clean verify sonar:sonar \
-          -Dspring.profiles.active=ci \
+          -Dspring.profile.active=ci \
           -Dsonar.projectKey=yes-25-5-authority \
           -Dsonar.projectName='yes-25-5-authority' \
-          -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Build Maven project in Docker

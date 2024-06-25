@@ -32,7 +32,7 @@ jobs:
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no Dockerfile ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/Dockerfile
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no pom.xml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/pom.xml
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no -r src ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/src
-          scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no -r src/main/resources/application-prod.yml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/src/main/resources/application-prod.yml
+          scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no src/main/resources/application-prod.yml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/src/main/resources/application-prod.yml
 
       - name: Check Dockerfile on Remote Server
         env:
@@ -43,12 +43,15 @@ jobs:
           ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/Dockerfile"
           ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/pom.xml"
           ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/src"
+          ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/src/main/resources/application-prod.yml"
 
       - name: Deploy JAR on Remote Server
         env:
           REMOTE_USER: ${{ secrets.SSH_USER }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
+          EUREKA_SERVER_HOSTNAME: ${{ secrets.EUREKA_SERVER_HOSTNAME }}
+          EUREKA_SERVER_PORT: ${{ secrets.EUREKA_SERVER_PORT }}
         run: |
           ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} << EOF
             cd ${REMOTE_DIR}
@@ -59,7 +62,11 @@ jobs:
             docker build -t authority-app .
             docker stop authority-app || true
             docker rm authority-app || true
-            docker run -d -p 8051:8051 --name authority-app authority-app java -jar authority-server-1.0-SNAPSHOT.jar
+            docker run -d -p 8050:8050 --name authority-app \
+              -e YES25_5_MYSQL_PASSWORD=${YES25_5_MYSQL_PASSWORD} \
+              -e EUREKA_SERVER_HOSTNAME=${EUREKA_SERVER_HOSTNAME} \
+              -e EUREKA_SERVER_PORT=${EUREKA_SERVER_PORT} \
+              authority-app
           EOF
 
       - name: Send Deployment Status to Dooray
