@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "userAdaptor", url = "${eureka.gateway}/auth")
+@FeignClient(name = "userAdaptor", url = "${api.book-user}")
 public interface UserAdaptor {
 
     @PostMapping("/users")
