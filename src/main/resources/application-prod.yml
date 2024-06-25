@@ -6,7 +6,6 @@ spring:
     name: authority-server
 
 eureka:
-  gateway: http://133.186.153.195:8761
   client:
     serviceUrl:
       defaultZone: http://133.186.153.195:8761/eureka/

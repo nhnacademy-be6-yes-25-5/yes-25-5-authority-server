@@ -6,7 +6,6 @@ spring:
     name: authority-server
 
 eureka:
-  gateway: http://localhost:8085
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
