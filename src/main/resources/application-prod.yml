@@ -1,12 +1,12 @@
 server:
-  port: 8050
+  port: 8051
 
 spring:
   application:
-    name: authority-server
+    name: authority-server-1
 
 eureka:
   gateway: http://133.186.153.195:8761
 
 api:
-  book-user: http://133.186.153.195:8760
+  books-users: http://133.186.153.195:8061

@@ -1,5 +1,5 @@
 server:
-  port: 8051
+  port: 8050
 
 spring:
   application:
@@ -9,4 +9,4 @@ eureka:
   gateway: http://localhost:8085
 
 api:
-  book-user: http://localhost:8085
+  books-users: http://localhost:8061

@@ -1,16 +1,12 @@
 server:
-  port: 8051
+  port: 8050
 
 spring:
   application:
-    name: authority-server
+    name: authority-server-1
 
 eureka:
   gateway: http://localhost:8085
 
-api:
-  book-user: http://localhost:8085
-
 jwt:
-  secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
-  expiration-ms: 1800000
+  secret: dsfsjfhsajkfhjdfhfkjsafjklad
