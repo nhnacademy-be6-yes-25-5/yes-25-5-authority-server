@@ -31,7 +31,7 @@ jobs:
           -Dspring.profile.active=ci \
           -Dsonar.projectKey=yes-25-5-authority \
           -Dsonar.projectName='yes-25-5-authority' \
-          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Build Maven project in Docker
