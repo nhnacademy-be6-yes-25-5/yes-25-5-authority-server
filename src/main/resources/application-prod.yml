@@ -15,3 +15,7 @@ eureka:
 
 api:
   book-user: ${EUREKA_SERVER_HOSTNAME}:8060
+
+logging:
+  file:
+    path: ${user.home}/logs/${spring.application.name}

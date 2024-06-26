@@ -32,7 +32,9 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<String> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
-
+        log.info("들어가나?");
+        log.warn("들어가나?");
+        log.error("들어가나?");
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
         String jwt = jwtUtil.createJwt(
                 user.userId(),
@@ -45,6 +47,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public ResponseEntity<String> tokenTest(@RequestHeader("Authorization") String token) {
+        log.info("들어가나?2");
         return ResponseEntity.ok(token);
     }
 
