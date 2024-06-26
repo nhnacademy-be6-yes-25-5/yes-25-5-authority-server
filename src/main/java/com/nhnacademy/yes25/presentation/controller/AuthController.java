@@ -32,7 +32,6 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<String> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
-
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
         String jwt = jwtUtil.createJwt(
                 user.userId(),
