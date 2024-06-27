@@ -19,11 +19,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                    .anyRequest().permitAll());
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/auth/login").permitAll()
+                                .anyRequest().authenticated());
 
         return http.build();
     }

@@ -5,6 +5,7 @@ import com.nhnacademy.yes25.common.jwt.JwtUserDetails;
 import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
 import com.nhnacademy.yes25.common.provider.JWTUtil;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
+import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
