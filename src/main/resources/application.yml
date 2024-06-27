@@ -4,5 +4,5 @@ spring:
   profiles:
     active: dev
 jwt:
-  secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
+  secret: ${JWT_SECRET}
   expiration-ms: 1800000
