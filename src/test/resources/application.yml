@@ -12,7 +12,7 @@ api:
   book-user: http://localhost:8085
 
 jwt:
-  secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
+  secret: ${JWT_SECRET}
   expiration-ms: 1800000
 
 logging:

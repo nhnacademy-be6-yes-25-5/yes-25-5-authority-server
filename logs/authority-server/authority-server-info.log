@@ -1,124 +1,454 @@
-2024-06-26 12:36:21.726 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 8075 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
-2024-06-26 12:36:21.728 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
-2024-06-26 12:36:21.765 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2024-06-26 12:36:21.765 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2024-06-26 12:36:22.474 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=cb4de4a1-7cbd-3805-a384-80e0fba39de7
-2024-06-26 12:36:22.769 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
-2024-06-26 12:36:22.778 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2024-06-26 12:36:22.778 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
-2024-06-26 12:36:22.809 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2024-06-26 12:36:22.809 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1043 ms
-2024-06-26 12:36:23.052 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2024-06-26 12:36:23.641 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
-2024-06-26 12:36:23.656 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@1a84e522
-2024-06-26 12:36:23.673 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2024-06-26 12:36:23.719 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2024-06-26 12:36:23.744 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2024-06-26 12:36:23.748 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2024-06-26 12:36:23.763 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2024-06-26 12:36:23.764 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2024-06-26 12:36:24.040 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2024-06-26 12:36:24.042 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2024-06-26 12:36:24.043 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2024-06-26 12:36:24.046 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719372984046 with initial instances count: 3
-2024-06-26 12:36:24.047 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
-2024-06-26 12:36:24.047 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719372984047, current=UP, previous=STARTING]
-2024-06-26 12:36:24.048 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
-2024-06-26 12:36:24.054 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
-2024-06-26 12:36:24.054 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
-2024-06-26 12:36:24.074 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
-2024-06-26 12:36:24.080 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 2.827 seconds (process running for 3.549)
-2024-06-26 12:36:24.361 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-06-26 12:36:24.361 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2024-06-26 12:36:24.363 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2024-06-26 12:39:04.615 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2024-06-26 12:39:04.629 [Thread-5] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
-2024-06-26 12:39:04.629 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719373144629, current=DOWN, previous=UP]
-2024-06-26 12:39:04.630 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
-2024-06-26 12:39:04.680 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
-2024-06-26 12:39:04.681 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
-2024-06-26 12:39:07.687 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
-2024-06-26 12:39:07.697 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
-2024-06-26 12:39:07.702 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
-2024-06-26 12:39:07.809 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 8075 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
-2024-06-26 12:39:07.810 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
-2024-06-26 12:39:08.071 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=cb4de4a1-7cbd-3805-a384-80e0fba39de7
-2024-06-26 12:39:08.115 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
-2024-06-26 12:39:08.115 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2024-06-26 12:39:08.115 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
-2024-06-26 12:39:08.126 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2024-06-26 12:39:08.127 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 316 ms
-2024-06-26 12:39:08.200 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2024-06-26 12:39:08.344 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
-2024-06-26 12:39:08.352 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@53e3c5de
-2024-06-26 12:39:08.360 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2024-06-26 12:39:08.381 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2024-06-26 12:39:08.383 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2024-06-26 12:39:08.383 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2024-06-26 12:39:08.388 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2024-06-26 12:39:08.409 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2024-06-26 12:39:08.410 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2024-06-26 12:39:08.410 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2024-06-26 12:39:08.411 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719373148411 with initial instances count: 3
-2024-06-26 12:39:08.411 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
-2024-06-26 12:39:08.411 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719373148411, current=UP, previous=STARTING]
-2024-06-26 12:39:08.411 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
-2024-06-26 12:39:08.412 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
-2024-06-26 12:39:08.412 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
-2024-06-26 12:39:08.420 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
-2024-06-26 12:39:08.427 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 0.65 seconds (process running for 167.904)
-2024-06-26 12:39:08.429 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
-2024-06-26 12:42:24.684 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
-2024-06-26 12:42:24.690 [Thread-9] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
-2024-06-26 12:42:24.690 [Thread-9] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719373344690, current=DOWN, previous=UP]
-2024-06-26 12:42:24.691 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
-2024-06-26 12:42:24.721 [Thread-9] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
-2024-06-26 12:42:24.736 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
-2024-06-26 12:42:24.738 [Thread-9] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
-2024-06-26 12:42:24.745 [Thread-9] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
-2024-06-26 12:42:24.749 [Thread-9] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
-2024-06-26 12:42:25.000 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 8075 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
-2024-06-26 12:42:25.005 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
-2024-06-26 12:42:25.484 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=cb4de4a1-7cbd-3805-a384-80e0fba39de7
-2024-06-26 12:42:25.532 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
-2024-06-26 12:42:25.533 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2024-06-26 12:42:25.533 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
-2024-06-26 12:42:25.544 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2024-06-26 12:42:25.544 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 532 ms
-2024-06-26 12:42:25.630 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2024-06-26 12:42:25.792 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
-2024-06-26 12:42:25.801 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@57af88a1
-2024-06-26 12:42:25.808 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2024-06-26 12:42:25.829 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2024-06-26 12:42:25.831 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2024-06-26 12:42:25.831 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2024-06-26 12:42:25.832 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2024-06-26 12:42:25.856 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2024-06-26 12:42:25.857 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2024-06-26 12:42:25.857 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2024-06-26 12:42:25.858 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719373345858 with initial instances count: 3
-2024-06-26 12:42:25.858 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
-2024-06-26 12:42:25.858 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719373345858, current=UP, previous=STARTING]
-2024-06-26 12:42:25.858 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
-2024-06-26 12:42:25.859 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
-2024-06-26 12:42:25.859 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
-2024-06-26 12:42:25.866 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
-2024-06-26 12:42:25.874 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 0.986 seconds (process running for 365.36)
-2024-06-26 12:42:25.875 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2024-06-27 09:25:51.567 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 64619 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:25:51.573 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:25:51.607 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 09:25:51.607 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 09:25:52.359 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:25:52.655 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:25:52.665 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:25:52.665 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:25:52.695 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:25:52.696 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1088 ms
+2024-06-27 09:25:52.926 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 09:25:53.049 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 09:25:53.287 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@54525716
+2024-06-27 09:25:53.302 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 09:25:53.308 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@18f8606d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18a575a4, org.springframework.security.web.context.SecurityContextHolderFilter@4370d31, org.springframework.security.web.header.HeaderWriterFilter@2dceeaaf, org.springframework.web.filter.CorsFilter@1a6f231d, org.springframework.security.web.authentication.logout.LogoutFilter@4598e05f, com.nhnacademy.yes25.common.jwt.JwtFilter@4dc4b696, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c410ed5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e306d8e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53ffc750, org.springframework.security.web.access.ExceptionTranslationFilter@54738e02, org.springframework.security.web.access.intercept.AuthorizationFilter@2d45b30d]
+2024-06-27 09:25:53.581 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 09:25:53.650 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 09:25:53.674 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 09:25:53.678 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:25:53.690 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 09:25:53.691 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 09:25:53.957 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 09:25:53.959 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 09:25:53.960 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 09:25:53.963 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719447953962 with initial instances count: 1
+2024-06-27 09:25:53.964 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 09:25:53.964 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719447953964, current=UP, previous=STARTING]
+2024-06-27 09:25:53.965 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:25:53.971 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 09:25:53.972 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 09:25:53.989 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 2.835 seconds (process running for 3.519)
+2024-06-27 09:25:53.990 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:25:54.290 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 09:25:54.290 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 09:25:54.291 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-06-27 09:26:20.173 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 09:26:20.174 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719447980174, current=DOWN, previous=UP]
+2024-06-27 09:26:20.174 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:26:20.213 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 09:26:20.214 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:26:20.215 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 09:26:20.219 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 09:26:20.222 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 09:26:23.333 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 64675 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:26:23.335 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:26:23.384 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 09:26:23.385 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 09:26:24.152 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:26:24.437 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:26:24.446 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:26:24.447 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:26:24.477 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:26:24.478 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1093 ms
+2024-06-27 09:26:24.706 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 09:26:24.824 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 09:26:25.053 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@318efd01
+2024-06-27 09:26:25.068 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 09:26:25.074 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5222dce8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e03b0b7, org.springframework.security.web.context.SecurityContextHolderFilter@1ec67bb7, org.springframework.security.web.header.HeaderWriterFilter@65a92ced, org.springframework.web.filter.CorsFilter@30f68cf, org.springframework.security.web.authentication.logout.LogoutFilter@7506762d, com.nhnacademy.yes25.common.jwt.JwtFilter@e634ee5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6ee734e7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1844571c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@cc74f59, org.springframework.security.web.access.ExceptionTranslationFilter@63d4af96, org.springframework.security.web.access.intercept.AuthorizationFilter@7d802bb0]
+2024-06-27 09:26:25.342 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 09:26:25.408 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 09:26:25.429 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 09:26:25.433 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:26:25.444 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 09:26:25.445 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 09:26:25.700 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 09:26:25.701 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 09:26:25.702 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 09:26:25.705 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719447985705 with initial instances count: 1
+2024-06-27 09:26:25.706 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 09:26:25.707 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719447985707, current=UP, previous=STARTING]
+2024-06-27 09:26:25.708 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:26:25.714 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 09:26:25.715 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 09:26:25.732 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 3.056 seconds (process running for 4.172)
+2024-06-27 09:26:25.732 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:26:26.254 [RMI TCP Connection(3)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 09:26:26.254 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 09:26:26.255 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-06-27 09:28:35.285 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2024-06-27 09:28:35.292 [Thread-5] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 09:28:35.292 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719448115292, current=DOWN, previous=UP]
+2024-06-27 09:28:35.293 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:28:35.313 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:28:35.319 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 09:28:38.343 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 09:28:38.398 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 09:28:38.423 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 09:28:38.585 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 64675 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:28:38.585 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:28:38.970 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:28:39.031 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:28:39.033 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:28:39.033 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:28:39.048 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:28:39.049 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 462 ms
+2024-06-27 09:28:39.139 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 09:28:39.174 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 09:28:39.248 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@7c6f3468
+2024-06-27 09:28:39.259 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 09:28:39.261 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f4e6cd5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3289be3c, org.springframework.security.web.context.SecurityContextHolderFilter@48a7c3cb, org.springframework.security.web.header.HeaderWriterFilter@6ae0b3ba, org.springframework.web.filter.CorsFilter@ff64138, org.springframework.security.web.authentication.logout.LogoutFilter@1e155ced, com.nhnacademy.yes25.common.jwt.JwtFilter@390bac6c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@679eca95, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1693c488, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57a6d0df, org.springframework.security.web.access.ExceptionTranslationFilter@120c7e10, org.springframework.security.web.access.intercept.AuthorizationFilter@1c888011]
+2024-06-27 09:28:39.325 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 09:28:39.356 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 09:28:39.359 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 09:28:39.359 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 09:28:39.364 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 09:28:39.387 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 09:28:39.387 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 09:28:39.388 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 09:28:39.389 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719448119389 with initial instances count: 2
+2024-06-27 09:28:39.389 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 09:28:39.389 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719448119389, current=UP, previous=STARTING]
+2024-06-27 09:28:39.389 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:28:39.390 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 09:28:39.390 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 09:28:39.402 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 0.866 seconds (process running for 137.849)
+2024-06-27 09:28:39.404 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2024-06-27 09:28:39.406 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:33:39.356 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:38:39.351 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:43:39.344 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:44:40.202 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 09:44:40.203 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719449080203, current=DOWN, previous=UP]
+2024-06-27 09:44:40.203 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:44:40.211 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:44:40.216 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 09:44:43.220 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 09:44:43.226 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 09:44:43.228 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 09:44:49.238 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 66089 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:44:49.244 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:44:49.319 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 09:44:49.320 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 09:44:51.035 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:44:51.725 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:44:51.750 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:44:51.751 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:44:51.820 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:44:51.821 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2500 ms
+2024-06-27 09:44:52.373 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 09:44:53.002 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 09:44:53.546 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@525c4d62
+2024-06-27 09:44:53.572 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 09:44:53.583 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@729f2e98, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7eb142d4, org.springframework.security.web.context.SecurityContextHolderFilter@1ce3304, org.springframework.security.web.header.HeaderWriterFilter@47f342c7, org.springframework.web.filter.CorsFilter@3de4eaf, org.springframework.security.web.authentication.logout.LogoutFilter@469e51aa, com.nhnacademy.yes25.common.jwt.JwtFilter@5ed4cbaf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32a6d4fd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b70da9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1b826c1f, org.springframework.security.web.access.ExceptionTranslationFilter@5b4d298e, org.springframework.security.web.access.intercept.AuthorizationFilter@d60284f]
+2024-06-27 09:44:54.323 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 09:44:54.815 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 09:44:55.033 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 09:44:55.057 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:44:55.112 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 09:44:55.113 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 09:44:55.113 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 09:44:55.116 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 09:44:55.117 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 09:44:55.119 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 09:44:55.120 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 09:44:56.471 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 09:44:56.475 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 09:44:56.481 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 09:44:56.489 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719449096488 with initial instances count: 1
+2024-06-27 09:44:56.492 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 09:44:56.494 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719449096494, current=UP, previous=STARTING]
+2024-06-27 09:44:56.499 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:44:56.523 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 09:44:56.525 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 09:44:56.579 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 8.312 seconds (process running for 10.0)
+2024-06-27 09:44:56.602 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:44:56.987 [RMI TCP Connection(4)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 09:44:56.988 [RMI TCP Connection(4)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 09:44:56.992 [RMI TCP Connection(4)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2024-06-27 09:49:55.113 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 09:50:45.428 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-06-27 09:50:45.438 [Thread-5] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 09:50:45.439 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719449445439, current=DOWN, previous=UP]
+2024-06-27 09:50:45.443 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 09:50:45.520 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 09:50:45.549 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 09:50:48.558 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 09:50:48.567 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 09:50:48.573 [Thread-5] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 09:50:48.689 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 66089 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:50:48.689 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:50:49.024 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:50:49.086 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:50:49.087 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:50:49.087 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:50:49.100 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:50:49.100 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 409 ms
+2024-06-27 09:50:49.147 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-27 09:50:49.157 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-27 09:58:06.227 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 66089 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:58:06.236 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:58:08.033 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:58:08.163 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:58:08.165 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:58:08.165 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:58:08.191 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:58:08.191 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1947 ms
+2024-06-27 09:58:08.382 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-27 09:58:08.407 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-27 09:58:09.911 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 66089 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:58:09.912 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:58:10.572 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:58:10.611 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:58:10.612 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:58:10.612 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:58:10.623 [restartedMain] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:58:10.624 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 708 ms
+2024-06-27 09:58:10.665 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-27 09:58:10.674 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-27 09:59:07.578 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 67437 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 09:59:07.581 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 09:59:07.612 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 09:59:07.612 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 09:59:08.320 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 09:59:08.608 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 09:59:08.617 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 09:59:08.617 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 09:59:08.646 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 09:59:08.647 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1035 ms
+2024-06-27 09:59:08.774 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-27 09:59:08.793 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-27 10:00:58.051 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 67621 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 10:00:58.056 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 10:00:58.105 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 10:00:58.105 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 10:00:59.043 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 10:00:59.327 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 10:00:59.336 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 10:00:59.336 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 10:00:59.366 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 10:00:59.366 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1260 ms
+2024-06-27 10:00:59.590 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 10:00:59.709 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 10:00:59.936 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@7358f38c
+2024-06-27 10:00:59.951 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 10:00:59.958 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6b78bc73, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3aaa4bb9, org.springframework.security.web.context.SecurityContextHolderFilter@35284701, org.springframework.security.web.header.HeaderWriterFilter@50603276, org.springframework.web.filter.CorsFilter@783d1959, org.springframework.security.web.authentication.logout.LogoutFilter@2ff1ccc8, com.nhnacademy.yes25.common.jwt.JwtFilter@766ebb4f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ef6358c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55f3dcbe, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@24440022, org.springframework.security.web.access.ExceptionTranslationFilter@b277a69, org.springframework.security.web.access.intercept.AuthorizationFilter@3d4d99dc]
+2024-06-27 10:01:00.211 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 10:01:00.275 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 10:01:00.297 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 10:01:00.301 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:01:00.313 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 10:01:00.313 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 10:01:00.314 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 10:01:00.314 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 10:01:00.314 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 10:01:00.314 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 10:01:00.314 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 10:01:00.577 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 10:01:00.578 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 10:01:00.580 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 10:01:00.582 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719450060582 with initial instances count: 1
+2024-06-27 10:01:00.583 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 10:01:00.584 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719450060584, current=UP, previous=STARTING]
+2024-06-27 10:01:00.585 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:01:00.592 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 10:01:00.592 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 10:01:00.609 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 3.263 seconds (process running for 4.133)
+2024-06-27 10:01:00.610 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:01:00.928 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 10:01:00.929 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 10:01:00.930 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-06-27 10:05:54.835 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 10:05:54.837 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719450354837, current=DOWN, previous=UP]
+2024-06-27 10:05:54.837 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:05:54.863 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:05:54.867 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 10:05:57.873 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 10:05:57.879 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 10:05:57.884 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 10:05:59.829 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 68109 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 10:05:59.833 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 10:05:59.875 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 10:05:59.875 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 10:06:00.925 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 10:06:01.424 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 10:06:01.441 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 10:06:01.442 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 10:06:01.493 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 10:06:01.494 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1618 ms
+2024-06-27 10:06:01.901 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 10:06:02.095 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 10:06:02.628 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@3f4132e7
+2024-06-27 10:06:02.673 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 10:06:02.687 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5c97aab1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51a3b707, org.springframework.security.web.context.SecurityContextHolderFilter@2842e3d5, org.springframework.security.web.header.HeaderWriterFilter@7ab301f2, org.springframework.web.filter.CorsFilter@22ec99d, org.springframework.security.web.authentication.logout.LogoutFilter@2d067c0e, com.nhnacademy.yes25.common.jwt.JwtFilter@71eb6baa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34548614, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@20edfb8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3f7d02a, org.springframework.security.web.access.ExceptionTranslationFilter@79de210f, org.springframework.security.web.access.intercept.AuthorizationFilter@201e71b]
+2024-06-27 10:06:03.177 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 10:06:03.282 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 10:06:03.319 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 10:06:03.325 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:06:03.344 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 10:06:03.345 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 10:06:03.771 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 10:06:03.774 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 10:06:03.777 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 10:06:03.781 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719450363781 with initial instances count: 2
+2024-06-27 10:06:03.783 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 10:06:03.783 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719450363783, current=UP, previous=STARTING]
+2024-06-27 10:06:03.785 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:06:03.795 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 10:06:03.796 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 10:06:03.823 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 4.416 seconds (process running for 4.937)
+2024-06-27 10:06:03.828 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:06:04.345 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 10:06:04.345 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 10:06:04.347 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-06-27 10:09:54.731 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 10:09:54.738 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719450594738, current=DOWN, previous=UP]
+2024-06-27 10:09:54.739 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:09:54.768 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:09:54.779 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 10:09:57.789 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 10:09:57.799 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 10:09:57.805 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 10:09:59.849 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 68597 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 10:09:59.851 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 10:09:59.884 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 10:09:59.885 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 10:10:00.635 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 10:10:00.916 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 10:10:00.925 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 10:10:00.927 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 10:10:00.957 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 10:10:00.957 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1072 ms
+2024-06-27 10:10:01.190 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 10:10:01.307 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 10:10:01.538 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@1f1ec3d3
+2024-06-27 10:10:01.553 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 10:10:01.560 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b3311c4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61fdbc7c, org.springframework.security.web.context.SecurityContextHolderFilter@7ce276a, org.springframework.security.web.header.HeaderWriterFilter@5ef38eae, org.springframework.web.filter.CorsFilter@2e80bbf3, org.springframework.security.web.authentication.logout.LogoutFilter@12b1f950, com.nhnacademy.yes25.common.jwt.JwtFilter@1799de3e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5b15a734, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@62f1d080, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4281bed2, org.springframework.security.web.access.ExceptionTranslationFilter@7028b082, org.springframework.security.web.access.intercept.AuthorizationFilter@33652638]
+2024-06-27 10:10:01.808 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 10:10:01.870 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 10:10:01.892 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 10:10:01.895 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:10:01.907 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 10:10:01.908 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 10:10:02.160 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 10:10:02.162 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 10:10:02.163 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 10:10:02.166 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719450602165 with initial instances count: 3
+2024-06-27 10:10:02.167 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 10:10:02.167 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719450602167, current=UP, previous=STARTING]
+2024-06-27 10:10:02.168 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:10:02.174 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 10:10:02.175 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 10:10:02.191 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:10:02.192 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 2.763 seconds (process running for 3.411)
+2024-06-27 10:10:02.594 [RMI TCP Connection(3)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 10:10:02.594 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 10:10:02.596 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-06-27 10:15:01.901 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:20:01.901 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:25:01.895 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:30:01.907 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:35:01.900 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:40:01.894 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:45:01.895 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:50:01.899 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:54:13.007 [SpringApplicationShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application AUTHORITY-SERVER with eureka with status DOWN
+2024-06-27 10:54:13.009 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719453253009, current=DOWN, previous=UP]
+2024-06-27 10:54:13.009 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:54:13.020 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:54:13.029 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2024-06-27 10:54:16.037 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2024-06-27 10:54:16.042 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - deregister  status: 200
+2024-06-27 10:54:16.048 [SpringApplicationShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient
+2024-06-27 10:54:18.015 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 72313 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-27 10:54:18.021 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "dev"
+2024-06-27 10:54:18.056 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-06-27 10:54:18.057 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-06-27 10:54:18.776 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=03a804a0-87eb-38dc-8130-1b140f861b27
+2024-06-27 10:54:19.055 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8051 (http)
+2024-06-27 10:54:19.064 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-27 10:54:19.064 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-27 10:54:19.095 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-27 10:54:19.095 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1038 ms
+2024-06-27 10:54:19.321 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-06-27 10:54:19.439 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-27 10:54:19.665 [restartedMain] INFO  o.s.c.f.w.mvc.FunctionHandlerMapping - FunctionCatalog: org.springframework.cloud.function.context.catalog.BeanFactoryAwareFunctionRegistry@5324b06b
+2024-06-27 10:54:19.679 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2024-06-27 10:54:19.686 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32bb9c32, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7f95aeb9, org.springframework.security.web.context.SecurityContextHolderFilter@78dec1ba, org.springframework.security.web.header.HeaderWriterFilter@247f3803, org.springframework.web.filter.CorsFilter@1298690, org.springframework.security.web.authentication.logout.LogoutFilter@66d54eeb, com.nhnacademy.yes25.common.jwt.JwtFilter@3e54d2e2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1093d94a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c3a3952, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@151bd675, org.springframework.security.web.access.ExceptionTranslationFilter@622cf6c2, org.springframework.security.web.access.intercept.AuthorizationFilter@119b8f0b]
+2024-06-27 10:54:19.934 [restartedMain] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestTemplate.
+2024-06-27 10:54:19.997 [restartedMain] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2024-06-27 10:54:20.019 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2024-06-27 10:54:20.022 [restartedMain] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2024-06-27 10:54:20.034 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2024-06-27 10:54:20.286 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2024-06-27 10:54:20.288 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2024-06-27 10:54:20.289 [restartedMain] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-06-27 10:54:20.292 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1719453260292 with initial instances count: 3
+2024-06-27 10:54:20.293 [restartedMain] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application AUTHORITY-SERVER with eureka with status UP
+2024-06-27 10:54:20.293 [restartedMain] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1719453260293, current=UP, previous=STARTING]
+2024-06-27 10:54:20.294 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051: registering service...
+2024-06-27 10:54:20.301 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8051 (http) with context path '/'
+2024-06-27 10:54:20.301 [restartedMain] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8051
+2024-06-27 10:54:20.317 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_AUTHORITY-SERVER/172.20.201.189:authority-server:8051 - registration status: 204
+2024-06-27 10:54:20.318 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Started AuthApplication in 2.727 seconds (process running for 3.561)
+2024-06-27 10:54:20.693 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-27 10:54:20.693 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-27 10:54:20.696 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2024-06-27 10:59:20.032 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:04:20.042 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:09:20.042 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:14:20.042 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:19:20.041 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:24:20.037 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:29:20.035 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:34:20.028 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:39:20.028 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:49:18.518 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:54:21.492 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 11:59:21.746 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:04:21.749 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:25:41.449 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:34:05.148 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:39:05.144 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:44:05.136 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2024-06-27 12:49:05.130 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
