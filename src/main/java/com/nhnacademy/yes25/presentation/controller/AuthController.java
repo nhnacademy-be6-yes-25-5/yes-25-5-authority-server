@@ -6,7 +6,6 @@ import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
 import com.nhnacademy.yes25.common.provider.JWTUtil;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +45,7 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<String> tokenTest(HttpServletRequest request, @CurrentUser JwtUserDetails jwtUserDetails) {
+    public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
         return ResponseEntity.ok(jwtUserDetails.getUsername());
     }
 
