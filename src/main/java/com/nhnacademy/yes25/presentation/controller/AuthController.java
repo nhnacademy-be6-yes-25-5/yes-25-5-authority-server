@@ -39,6 +39,7 @@ public class AuthController {
                 user.loginStatusName()
         );
 
+        log.info("LogBack test");
         return ResponseEntity.ok(jwt);
     }
 
