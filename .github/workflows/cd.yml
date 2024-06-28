@@ -52,6 +52,7 @@ jobs:
           REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
           EUREKA_SERVER_HOSTNAME: ${{ secrets.EUREKA_SERVER_HOSTNAME }}
           EUREKA_SERVER_PORT: ${{ secrets.EUREKA_SERVER_PORT }}
+          YES25_5_MYSQL_PASSWORD: ${{ secrets.YES25_5_MYSQL_PASSWORD }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} << EOF
@@ -65,6 +66,7 @@ jobs:
             docker stop authority-app || true
             docker rm authority-app || true
             docker run -d -p 8050:8050 --name authority-app --network yes255-network \
+              -e YES25_5_MYSQL_PASSWORD=${YES25_5_MYSQL_PASSWORD} \
               -e EUREKA_SERVER_HOSTNAME=${EUREKA_SERVER_HOSTNAME} \
               -e EUREKA_SERVER_PORT=${EUREKA_SERVER_PORT} \
               -e JWT_SECRET=${JWT_SECRET} \
