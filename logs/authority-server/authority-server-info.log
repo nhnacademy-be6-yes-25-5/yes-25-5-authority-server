@@ -1,0 +1,14 @@
+2024-06-28 09:55:20.527 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - Starting AuthApplication using Java 21.0.1 with PID 36106 (/Users/chaesanghui/Desktop/yes-25-5-authority-server/target/classes started by chaesanghui in /Users/chaesanghui/Desktop/yes-25-5-authority-server)
+2024-06-28 09:55:20.528 [restartedMain] INFO  c.nhnacademy.yes25.AuthApplication - The following 1 profile is active: "1"
+2024-06-28 09:55:21.491 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-28 09:55:21.510 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2024-06-28 09:55:21.854 [restartedMain] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=0d4e7fb3-a338-3eea-8be2-1ef51ba2cf88
+2024-06-28 09:55:22.128 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8050 (http)
+2024-06-28 09:55:22.131 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-28 09:55:22.131 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-28 09:55:22.162 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-28 09:55:22.163 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1632 ms
+2024-06-28 09:55:22.383 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-28 09:55:22.401 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
