@@ -7,7 +7,11 @@ import java.util.Optional;
 public interface TokenInfoRepository extends JpaRepository<TokenInfo, Long> {
 
     Optional<TokenInfo> findByUuid(String uuid);
+
     Optional<TokenInfo> findByCustomerId(Long customerId);
+
     void deleteByUuid(String accessTokenUuid);
+
+    void deleteByCustomerId(Long customerId);
 
 }

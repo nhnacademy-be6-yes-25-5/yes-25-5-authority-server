@@ -2,7 +2,7 @@ name: Java CI with Docker
 
 on:
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop", "main" ]
 
 permissions: write-all
 

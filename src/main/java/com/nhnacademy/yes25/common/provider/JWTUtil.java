@@ -1,12 +1,15 @@
 package com.nhnacademy.yes25.common.provider;
 
+import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * JWTUtil 클래스는 JSON Web Token(JWT) 생성, 파싱, 검증 기능을 제공하는 유틸리티 클래스입니다.
@@ -31,24 +34,59 @@ public class JWTUtil {
         secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
-    /**
-     * 제공된 고객 ID, 사용자 역할, 로그인 상태 이름을 포함하는 새로운 JWT 토큰을 생성합니다.
-     *
-     * @param customerId JWT 토큰에 포함할 고객 ID
-     * @param userRole JWT 토큰에 포함할 사용자 역할
-     * @param loginStatusName JWT 토큰에 포함할 로그인 상태 이름
-     * @return 새로 생성된 JWT 토큰
-     */
-    public String createJwt(Long customerId, String userRole, String loginStatusName) {
+    public String createAccessJwt() {
         return Jwts.builder()
-                .setHeaderParam("typ", "JWT")
-                .claim("customerId", customerId)
-                .claim("userRole", userRole)
-                .claim("loginStatusName", loginStatusName)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_MS))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .header().add("typ", "ACCESS_TOKEN").and()
+                .subject(UUID.randomUUID().toString())
+                .issuedAt(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now().plusMillis(JWT_EXPIRATION_MS)))
+                .signWith(secretKey)
                 .compact();
     }
 
+    public String createRefrshJwt() {
+        return Jwts.builder()
+                .header().add("typ", "REFRESH_TOKEN").and()
+                .subject(UUID.randomUUID().toString())
+                .issuedAt(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now().plusMillis(JWT_EXPIRATION_MS)))
+                .signWith(secretKey)
+                .compact();
+    }
+
+    /**
+     * JWT 토큰에서 UUID를 추출합니다.
+     *
+     * @param token JWT 토큰
+     * @return 토큰에 포함된 UUID
+     * @throws JwtException 토큰이 유효하지 않거나 파싱 중 오류가 발생한 경우
+     */
+    public String getUuidFromToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+
+            return claims.getSubject();
+        } catch (Exception e) {
+            throw new JwtException("Invalid token", e);
+        }
+    }
+
+    /**
+     * JWT 토큰의 유효성을 검사합니다.
+     *
+     * @param token JWT 토큰
+     * @return 토큰이 유효하면 true, 그렇지 않으면 false
+     */
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
 }

@@ -31,7 +31,7 @@ public class JwtFilter extends GenericFilterBean {
         String path = request.getServletPath();
 
         // "/auth/login" 경로는 제외
-        if (path.startsWith("/auth/login")) {
+        if (path.startsWith("/auth/login") || path.startsWith("/users")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

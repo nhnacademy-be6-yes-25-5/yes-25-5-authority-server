@@ -10,13 +10,13 @@ import lombok.*;
 public class TokenInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String uuid;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long customerId;
 
     @Column(nullable = false)

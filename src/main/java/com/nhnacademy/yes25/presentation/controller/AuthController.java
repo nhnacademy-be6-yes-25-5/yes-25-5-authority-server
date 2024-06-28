@@ -1,9 +1,11 @@
 package com.nhnacademy.yes25.presentation.controller;
 
+import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
 import com.nhnacademy.yes25.common.jwt.JwtUserDetails;
 import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
 import com.nhnacademy.yes25.common.provider.JWTUtil;
+import com.nhnacademy.yes25.presentation.dto.request.CreateTokenInfoRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
+    private final TokenInfoService tokenInfoService;
     private final JWTUtil jwtUtil;
 
     /**
@@ -34,15 +37,32 @@ public class AuthController {
      * @return 생성된 JWT 토큰
      */
     @PostMapping("/login")
-    public ResponseEntity<String> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
-        LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
-        String jwt = jwtUtil.createJwt(
-                user.userId(),
-                user.userRole(),
-                user.loginStatusName()
-        );
+    public ResponseEntity<AuthResponse> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
 
-        return ResponseEntity.ok(jwt);
+        //회원 정보 가져오기
+        LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
+
+        // 토큰 생성
+        String accessJwt = jwtUtil.createAccessJwt();
+        String refreshJwt = jwtUtil.createRefrshJwt();
+
+        // DB에 넣는 DTO
+        CreateTokenInfoRequest request = CreateTokenInfoRequest.builder()
+                .uuid(jwtUtil.getUuidFromToken(accessJwt))
+                .customerId(user.userId())
+                .role(user.userRole())
+                .loginStateName(user.loginStatusName())
+                .refreshToken(refreshJwt)
+                .build();
+        log.info("request: {}", request);
+
+        //DB에 CREATE
+        tokenInfoService.createTokenInfo(request);
+
+        //응답 DTO
+        AuthResponse response = AuthResponse.builder().accessToken(accessJwt).refreshToken(refreshJwt).build();
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/test")

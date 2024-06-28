@@ -9,6 +9,9 @@ public interface TokenInfoService {
 
     ReadTokenInfoResponse getByUuid(String uuid);
 
-    void removeTokenInfo(String uuid);
+    boolean isTokenExistByCustomerId(Long customerId);
 
+    void removeTokenInfoByUuid(String uuid);
+
+    void removeTokenInfoByCustomerId(Long customerId);
 }
