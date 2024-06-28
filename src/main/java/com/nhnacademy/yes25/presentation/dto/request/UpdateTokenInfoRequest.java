@@ -2,12 +2,12 @@ package com.nhnacademy.yes25.presentation.dto.request;
 
 import com.nhnacademy.yes25.persistance.domain.TokenInfo;
 import lombok.Builder;
-
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Builder
-public record CreateTokenInfoRequest (
+public record UpdateTokenInfoRequest(
+        Long id,
         String uuid,
         Long customerId,
         String role,
@@ -18,13 +18,13 @@ public record CreateTokenInfoRequest (
 ) {
     public TokenInfo toEntity() {
         return TokenInfo.builder()
-                .id(null)
+                .id(id)
                 .uuid(UUID.randomUUID().toString())
                 .customerId(customerId)
                 .role(role)
                 .loginStateName(loginStateName)
                 .refreshToken(refreshToken)
-                .createdAt(ZonedDateTime.now())
+                .createdAt(createAt)
                 .updatedAt(ZonedDateTime.now())
                 .build();
     }
