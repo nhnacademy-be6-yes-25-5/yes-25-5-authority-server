@@ -11,4 +11,4 @@ api:
 
 logging:
   file:
-    path: ${user.dir}/logs/${spring.application.name}
+    path: /logs/${spring.application.name}
