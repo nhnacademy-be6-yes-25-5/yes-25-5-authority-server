@@ -22,8 +22,11 @@ public class JWTUtil {
 
     private final SecretKey secretKey;
 
-    @Value("${jwt.expiration-ms}")
-    private long JWT_EXPIRATION_MS; // 30분
+    @Value("${jwt.access-token.expiration-ms}")
+    private int accessTokenExpiration;
+
+    @Value("${jwt.refresh-token.expiration-ms}")
+    private int refreshTokenExpiration;
 
     /**
      * 제공된 비밀 키를 사용하여 JWTUtil 인스턴스를 생성합니다.
@@ -39,7 +42,7 @@ public class JWTUtil {
                 .header().add("typ", "ACCESS_TOKEN").and()
                 .subject(UUID.randomUUID().toString())
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now().plusMillis(JWT_EXPIRATION_MS)))
+                .expiration(Date.from(Instant.now().plusMillis(accessTokenExpiration)))
                 .signWith(secretKey)
                 .compact();
     }
@@ -49,7 +52,7 @@ public class JWTUtil {
                 .header().add("typ", "REFRESH_TOKEN").and()
                 .subject(UUID.randomUUID().toString())
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now().plusMillis(JWT_EXPIRATION_MS)))
+                .expiration(Date.from(Instant.now().plusMillis(refreshTokenExpiration)))
                 .signWith(secretKey)
                 .compact();
     }

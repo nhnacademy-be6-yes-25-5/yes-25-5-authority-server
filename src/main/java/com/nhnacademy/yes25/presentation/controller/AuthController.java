@@ -39,26 +39,6 @@ public class AuthController {
 
         //회원 정보 가져오기
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder().email(loginUserRequest.email()).password(loginUserRequest.password()).build());
-//
-//        // 토큰 생성
-//        String accessJwt = jwtUtil.createAccessJwt();
-//        String refreshJwt = jwtUtil.createRefrshJwt();
-//
-//        // DB에 넣는 DTO
-//        CreateTokenInfoRequest request = CreateTokenInfoRequest.builder()
-//                .uuid(jwtUtil.getUuidFromToken(accessJwt))
-//                .customerId(user.userId())
-//                .role(user.userRole())
-//                .loginStateName(user.loginStatusName())
-//                .refreshToken(refreshJwt)
-//                .build();
-//        log.info("request: {}", request);
-//
-//        //DB에 CREATE
-//        tokenInfoService.createTokenInfo(request);
-//
-//        //응답 DTO
-//        AuthResponse response = AuthResponse.builder().accessToken(accessJwt).refreshToken(refreshJwt).build();
 
         return ResponseEntity.ok(tokenInfoService.doLogin(user));
     }

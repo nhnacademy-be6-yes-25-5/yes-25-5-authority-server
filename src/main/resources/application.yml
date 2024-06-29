@@ -17,5 +17,9 @@ spring:
   profiles:
     active: dev
 jwt:
+  access-token:
+    expiration-ms: 18000
+  refresh-token:
+    expiration-ms: 8640000
   secret: ${JWT_SECRET}
-  expiration-ms: 1800000
+
