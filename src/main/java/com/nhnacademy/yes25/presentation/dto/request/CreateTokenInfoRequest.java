@@ -19,13 +19,13 @@ public record CreateTokenInfoRequest (
     public TokenInfo toEntity() {
         return TokenInfo.builder()
                 .id(null)
-                .uuid(UUID.randomUUID().toString())
+                .uuid(uuid)
                 .customerId(customerId)
                 .role(role)
                 .loginStateName(loginStateName)
                 .refreshToken(refreshToken)
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
+                .createdAt(createAt)
+                .updatedAt(updateAt)
                 .build();
     }
 }

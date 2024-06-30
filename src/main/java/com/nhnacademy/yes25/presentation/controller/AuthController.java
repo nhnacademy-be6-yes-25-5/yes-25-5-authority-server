@@ -4,7 +4,7 @@ import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
 import com.nhnacademy.yes25.common.jwt.JwtUserDetails;
 import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
-import com.nhnacademy.yes25.presentation.dto.request.CreateTokenInfoRequest;
+import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
@@ -46,6 +46,12 @@ public class AuthController {
     @GetMapping("/test")
     public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
         return ResponseEntity.ok(jwtUserDetails.getUsername());
+    }
+
+    @GetMapping("/refresh")
+    public ResponseEntity<AuthResponse> tokenRefresh(@RequestBody CreateAccessTokenRequest request) {
+        AuthResponse authResponse =tokenInfoService.updateAccessToken(request);
+        return ResponseEntity.ok(authResponse);
     }
 
 }

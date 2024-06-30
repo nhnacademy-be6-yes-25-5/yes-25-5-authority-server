@@ -45,6 +45,16 @@ public class JwtProvider {
         }
     }
 
+    public String getUuidFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
+    }
+
     public Long getUserNameFromToken(String token) {
         Integer customerId = (Integer) Jwts.parser().setSigningKey(secretKey)
                 .build()

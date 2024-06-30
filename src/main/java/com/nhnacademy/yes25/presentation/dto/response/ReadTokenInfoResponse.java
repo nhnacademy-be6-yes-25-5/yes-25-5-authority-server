@@ -7,7 +7,8 @@ import lombok.Builder;
 public record ReadTokenInfoResponse (
         Long customerId,
         String role,
-        String loginStateName
+        String loginStateName,
+        String refreshToken
 )
 {
     public static ReadTokenInfoResponse fromEntity(TokenInfo tokenInfo) {
@@ -15,6 +16,7 @@ public record ReadTokenInfoResponse (
                 .customerId(tokenInfo.getCustomerId())
                 .role(tokenInfo.getRole())
                 .loginStateName(tokenInfo.getLoginStateName())
+                .refreshToken(tokenInfo.getRefreshToken())
                 .build();
     }
 }

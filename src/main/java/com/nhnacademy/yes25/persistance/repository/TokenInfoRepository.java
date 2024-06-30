@@ -12,6 +12,8 @@ public interface TokenInfoRepository extends JpaRepository<TokenInfo, Long> {
 
     Optional<TokenInfo> findByCustomerId(Long customerId);
 
+    Optional<TokenInfo> findByRefreshToken(String refreshToken);
+
     List<TokenInfo> findAllByCustomerId(Long customerId);
 
     void deleteByUuid(String accessTokenUuid);

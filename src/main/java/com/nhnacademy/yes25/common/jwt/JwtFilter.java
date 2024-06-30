@@ -1,7 +1,9 @@
 package com.nhnacademy.yes25.common.jwt;
 
+import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.common.exception.JwtException;
 import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
+import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -22,6 +24,7 @@ import java.util.Collections;
 public class JwtFilter extends GenericFilterBean {
 
     private final JwtProvider jwtProvider;
+    private final TokenInfoService tokenInfoService;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
@@ -30,7 +33,7 @@ public class JwtFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String path = request.getServletPath();
 
-        // "/auth/login" 경로는 제외
+        // "/auth/login", login에 필요한 정보 요청 경로는 제외
         if (path.startsWith("/auth/login") || path.startsWith("/users")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
@@ -39,11 +42,11 @@ public class JwtFilter extends GenericFilterBean {
         String token = getToken(request);
 
         if (jwtProvider.isValidToken(token)) {
-            Long customerId = jwtProvider.getUserNameFromToken(token);
-            String role = jwtProvider.getRolesFromToken(token);
-            JwtUserDetails jwtUserDetails = JwtUserDetails.of(customerId, role);
+            String uuid = jwtProvider.getUuidFromToken(token);
+            ReadTokenInfoResponse tokenInfo = tokenInfoService.getByUuid(uuid);
+            JwtUserDetails jwtUserDetails = JwtUserDetails.of(tokenInfo.customerId(), tokenInfo.role());
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    jwtUserDetails, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role))
+                    jwtUserDetails, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + tokenInfo.role()))
             );
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
