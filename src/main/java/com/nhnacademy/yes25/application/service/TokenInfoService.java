@@ -10,15 +10,15 @@ public interface TokenInfoService {
 
     AuthResponse doLogin(LoginUserResponse user);
 
+    void createTokenInfo(LoginUserResponse user, String accessJwt, String refreshJwt);
+
     AuthResponse updateAccessToken(CreateAccessTokenRequest request);
-
-    void updateTokenInfo(UpdateTokenInfoRequest updateRequest);
-
-    ReadTokenInfoResponse getByRefreshToken(String refreshToken);
 
     ReadTokenInfoResponse getByUuid(String uuid);
 
     ReadTokenInfoResponse getByCustomerId(Long customerId);
+
+    void updateTokenInfo(UpdateTokenInfoRequest updateRequest);
 
     void removeTokenInfoByUuid(String uuid);
 

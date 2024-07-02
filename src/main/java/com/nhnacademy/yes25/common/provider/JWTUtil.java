@@ -1,6 +1,5 @@
 package com.nhnacademy.yes25.common.provider;
 
-import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * JWTUtil 클래스는 JSON Web Token(JWT) 생성, 파싱, 검증 기능을 제공하는 유틸리티 클래스입니다.
+ * JWTUtil 클래스는 JSON Web Token(JWT) 생성 기능을 제공하는 유틸리티 클래스입니다.
  *
  * @author lettuce82
  * @version 1.0
@@ -57,39 +56,4 @@ public class JWTUtil {
                 .compact();
     }
 
-    /**
-     * JWT 토큰에서 UUID를 추출합니다.
-     *
-     * @param token JWT 토큰
-     * @return 토큰에 포함된 UUID
-     * @throws JwtException 토큰이 유효하지 않거나 파싱 중 오류가 발생한 경우
-     */
-    public String getUuidFromToken(String token) {
-        try {
-            Claims claims = Jwts.parser()
-                    .verifyWith(secretKey)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
-
-            return claims.getSubject();
-        } catch (Exception e) {
-            throw new JwtException("Invalid token", e);
-        }
-    }
-
-    /**
-     * JWT 토큰의 유효성을 검사합니다.
-     *
-     * @param token JWT 토큰
-     * @return 토큰이 유효하면 true, 그렇지 않으면 false
-     */
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token);
-            return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            return false;
-        }
-    }
 }

@@ -1,8 +1,10 @@
 package com.nhnacademy.yes25.common.jwt;
 
+import com.nhnacademy.yes25.common.exception.ExpiredAccessJwtException;
 import com.nhnacademy.yes25.common.exception.JwtException;
 import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -25,14 +27,15 @@ public class JwtProvider {
 
     public boolean isValidToken(String token) {
         try {
-            Jws<Claims> claimJets = Jwts.parser().setSigningKey(secretKey)
+            Jws<Claims> claimJets = Jwts.parser()
+                    .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
 
             Claims claims = claimJets.getBody();
 
             if (claims.getExpiration().before(new Date())) {
-                throw new JwtException(
+                throw new ExpiredAccessJwtException(
                         ErrorStatus.toErrorStatus("토큰의 유효시간이 지났습니다.", 401, LocalDateTime.now())
                 );
             }
@@ -46,30 +49,17 @@ public class JwtProvider {
     }
 
     public String getUuidFromToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public Long getUserNameFromToken(String token) {
-        Integer customerId = (Integer) Jwts.parser().setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .get("customerId");
-        return customerId.longValue();
-    }
-
-    public String getRolesFromToken(String token) {
-        return (String) Jwts.parser().setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .get("role");
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.getSubject();
+        } catch (ExpiredJwtException e) {
+            Claims expiredClaims = e.getClaims();
+            return expiredClaims.getSubject();
+        }
     }
 
 }
