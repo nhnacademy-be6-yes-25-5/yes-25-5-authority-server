@@ -14,6 +14,8 @@ import com.nhnacademy.yes25.presentation.dto.request.UpdateTokenInfoRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ import java.time.ZonedDateTime;
 @Service
 @RequiredArgsConstructor
 public class TokenInfoServiceImpl implements TokenInfoService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final JWTUtil jwtUtil;
     private final JwtProvider jwtProvider;
@@ -45,6 +50,10 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         String accessJwt = jwtUtil.createAccessJwt();
         String refreshJwt = jwtUtil.createRefrshJwt();
+        Long customerId = user.userId();
+
+        deleteAndClear(customerId);
+
         createTokenInfo(user, accessJwt, refreshJwt);
 
         return AuthResponse.builder()
@@ -52,6 +61,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .refreshToken(refreshJwt)
                 .build();
     }
+
 
     /**
      * 토큰 정보를 생성합니다.
@@ -180,6 +190,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     @Override
     public void removeTokenAllInfoByCustomerId(Long customerId) {
         tokenInfoRepository.deleteAllByCustomerId(customerId);
+    }
+
+    @Transactional
+    public void deleteAndClear(Long customerId) {
+        tokenInfoRepository.deleteAllByCustomerId(customerId);
+        entityManager.flush();
+        entityManager.clear();
     }
 
 }
