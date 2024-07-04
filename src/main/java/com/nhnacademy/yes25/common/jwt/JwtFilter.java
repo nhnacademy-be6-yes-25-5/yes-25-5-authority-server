@@ -11,6 +11,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,21 +53,18 @@ public class JwtFilter extends GenericFilterBean {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-
         String token = getToken(request);
 
-        if (jwtProvider.isValidToken(token)) {
-            String uuid = jwtProvider.getUuidFromToken(token);
+        String uuid = jwtProvider.getUuidFromToken(token);
 
-            //다른 api의 경우 아래 단계에서 인증 서버로 feign 요청을 보내서 tokenInfo를 가져와야 함
-            ReadTokenInfoResponse tokenInfo = tokenInfoService.getByUuid(uuid);
+        //다른 api의 경우 아래 단계에서 인증 서버로 feign 요청을 보내서 tokenInfo를 가져와야 함
+        ReadTokenInfoResponse tokenInfo = tokenInfoService.getByUuid(uuid);
 
-            JwtUserDetails jwtUserDetails = JwtUserDetails.of(tokenInfo.customerId(), tokenInfo.role());
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    jwtUserDetails, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + tokenInfo.role()))
-            );
-            SecurityContextHolder.getContext().setAuthentication(authToken);
-        }
+        JwtUserDetails jwtUserDetails = JwtUserDetails.of(tokenInfo.customerId(), tokenInfo.role());
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                jwtUserDetails, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + tokenInfo.role()))
+        );
+        SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(servletRequest, servletResponse);
     }
@@ -80,7 +78,7 @@ public class JwtFilter extends GenericFilterBean {
      */
     private String getToken(HttpServletRequest request) {
 
-        String accessJwtHeader = request.getHeader("Authorization");
+        String accessJwtHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (checkJwtHeaderValidity(accessJwtHeader)) {
             return accessJwtHeader.substring(7);
         }
@@ -107,6 +105,7 @@ public class JwtFilter extends GenericFilterBean {
      * @return 제외 경로인 경우 true, 그렇지 않으면 false
      */
     private boolean isExcludedPath(String path) {
+
         return path.equals("/auth/login") || path.equals("/users") || path.equals("/auth/refresh");
     }
 

@@ -8,9 +8,10 @@ import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +44,12 @@ public class AuthController {
                 .password(loginUserRequest.password())
                 .build());
 
-        return ResponseEntity.ok(tokenInfoService.doLogin(user));
+        AuthResponse authResponse = tokenInfoService.doLogin(user);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
+                .header("Refresh-Token", authResponse.refreshToken())
+                .body(authResponse);
     }
 
     /**
@@ -61,15 +67,19 @@ public class AuthController {
     /**
      * 만료된 액세스 토큰을 갱신합니다.
      *
-     * @param request HttpServletRequest 객체, Authorization 헤더에 만료된 액세스 토큰이 포함되어야 함
+     * @param expiredAccessJwt
      * @return ResponseEntity<AuthResponse> 새로 발급된 액세스 토큰과 리프레시 토큰을 포함한 응답
      */
     @GetMapping("/refresh")
-    public ResponseEntity<AuthResponse> tokenRefresh(HttpServletRequest request) {
-        String expiredAccessJwt = request.getHeader("Authorization");
+    public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader("Authorization") String expiredAccessJwt) {
+
+        expiredAccessJwt = expiredAccessJwt.replace("Bearer ", "");
         CreateAccessTokenRequest createAccessTokenRequest = new CreateAccessTokenRequest(expiredAccessJwt);
         AuthResponse authResponse = tokenInfoService.updateAccessToken(createAccessTokenRequest);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
+                .header("Refresh-Token", authResponse.refreshToken())
+                .body(authResponse);
 
-        return ResponseEntity.ok(authResponse);
     }
 }

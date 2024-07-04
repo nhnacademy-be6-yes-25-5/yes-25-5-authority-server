@@ -8,7 +8,7 @@ public record ReadTokenInfoResponse (
         Long customerId,
         String role,
         String loginStateName,
-        String refreshToken
+        String refreshJwt
 )
 {
     public static ReadTokenInfoResponse fromEntity(TokenInfo tokenInfo) {
@@ -16,7 +16,7 @@ public record ReadTokenInfoResponse (
                 .customerId(tokenInfo.getCustomerId())
                 .role(tokenInfo.getRole())
                 .loginStateName(tokenInfo.getLoginStateName())
-                .refreshToken(tokenInfo.getRefreshToken())
+                .refreshJwt(tokenInfo.getRefreshToken())
                 .build();
     }
 }
