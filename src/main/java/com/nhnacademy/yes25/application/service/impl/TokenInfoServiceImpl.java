@@ -126,9 +126,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .createAt(ZonedDateTime.now())
                 .updateAt(ZonedDateTime.now())
                 .build();
-
-
-        getByCustomerId(request.customerId());
+        tokenInfoRepository.save(createRequest.toEntity());
     }
 
     /**
