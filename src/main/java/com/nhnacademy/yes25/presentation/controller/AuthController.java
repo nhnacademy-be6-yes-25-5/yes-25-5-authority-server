@@ -4,16 +4,18 @@ import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
 import com.nhnacademy.yes25.common.jwt.JwtUserDetails;
 import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
+import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import jakarta.servlet.http.HttpServletResponse;
+import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * AuthController 클래스는 사용자 인증 및 로그인 기능을 제공하는 REST API 엔드포인트를 담당합니다.
@@ -52,6 +54,16 @@ public class AuthController {
                 .body(authResponse);
     }
 
+    @PostMapping("/login/none")
+    public ResponseEntity<NoneMemberLoginResponse> findLoginUserByEmail(@RequestBody NoneMemberLoginRequest request) {
+        NoneMemberLoginResponse authResponse = tokenInfoService.doLoginNoneMember(request);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
+                .header("Refresh-Token", authResponse.refreshToken())
+                .body(authResponse);
+    }
+
     /**
      * 토큰의 유효성을 테스트합니다.
      * 현재 인증된 사용자의 정보를 반환합니다.
@@ -80,6 +92,5 @@ public class AuthController {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
                 .header("Refresh-Token", authResponse.refreshToken())
                 .body(authResponse);
-
     }
 }

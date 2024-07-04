@@ -10,6 +10,7 @@ import com.nhnacademy.yes25.persistance.domain.TokenInfo;
 import com.nhnacademy.yes25.persistance.repository.TokenInfoRepository;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.CreateTokenInfoRequest;
+import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
 import com.nhnacademy.yes25.presentation.dto.request.UpdateTokenInfoRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
 
 /**
  * 토큰 기반으로 약식의 회원 정보 관리를 위한 서비스 구현 클래스입니다.
@@ -62,6 +64,31 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .build();
     }
 
+    /**
+     * 사용자 로그인을 처리하고 새로운 AccessToken과 RefreshToken을 발급합니다.
+     *
+     * @param request 비회원 사용자의 id
+     * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
+     */
+    @Transactional
+    @Override
+    public NoneMemberLoginResponse doLoginNoneMember(NoneMemberLoginRequest request) {
+        String accessJwt = jwtUtil.createAccessJwt();
+        String refreshJwt = jwtUtil.createRefrshJwt();
+
+        deleteAndClear(request.customerId());
+
+        createTokenInfoNoneMember(request, accessJwt, refreshJwt);
+
+        ReadTokenInfoResponse tokenInfo = getByCustomerId(request.customerId());
+
+        return NoneMemberLoginResponse.builder()
+                .accessToken(accessJwt)
+                .refreshToken(refreshJwt)
+                .customerId(request.customerId())
+                .role(tokenInfo.role()).build();
+    }
+
 
     /**
      * 토큰 정보를 생성합니다.
@@ -84,6 +111,24 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .updateAt(ZonedDateTime.now())
                 .build();
         tokenInfoRepository.save(createRequest.toEntity());
+    }
+
+    @Transactional
+    @Override
+    public void createTokenInfoNoneMember(NoneMemberLoginRequest request, String accessJwt, String refreshJwt) {
+
+        CreateTokenInfoRequest createRequest = CreateTokenInfoRequest.builder()
+                .uuid(jwtProvider.getUuidFromToken(accessJwt))
+                .customerId(request.customerId())
+                .role(request.role())
+                .loginStateName("None-Member")
+                .refreshToken(refreshJwt)
+                .createAt(ZonedDateTime.now())
+                .updateAt(ZonedDateTime.now())
+                .build();
+
+
+        getByCustomerId(request.customerId());
     }
 
     /**
