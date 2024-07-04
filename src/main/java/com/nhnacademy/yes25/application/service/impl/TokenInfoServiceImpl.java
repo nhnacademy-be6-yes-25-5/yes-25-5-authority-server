@@ -58,6 +58,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         createTokenInfo(user, accessJwt, refreshJwt);
 
+
         return AuthResponse.builder()
                 .accessToken(accessJwt)
                 .refreshToken(refreshJwt)
@@ -110,7 +111,9 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .createAt(ZonedDateTime.now())
                 .updateAt(ZonedDateTime.now())
                 .build();
-        tokenInfoRepository.save(createRequest.toEntity());
+
+        saveAndClear(createRequest);
+
     }
 
     @Transactional
@@ -238,6 +241,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     @Transactional
     public void deleteAndClear(Long customerId) {
         tokenInfoRepository.deleteAllByCustomerId(customerId);
+        entityManager.flush();
+        entityManager.clear();
+    }
+
+    @Transactional
+    public void saveAndClear(CreateTokenInfoRequest createRequest) {
+        tokenInfoRepository.save(createRequest.toEntity());
         entityManager.flush();
         entityManager.clear();
     }

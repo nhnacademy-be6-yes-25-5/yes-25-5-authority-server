@@ -10,12 +10,13 @@ import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
 
 /**
  * AuthController 클래스는 사용자 인증 및 로그인 기능을 제공하는 REST API 엔드포인트를 담당합니다.
@@ -40,18 +41,19 @@ public class AuthController {
      * @return ResponseEntity<AuthResponse> 생성된 JWT 토큰을 포함한 응답
      */
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest) {
+    public AuthResponse findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest, HttpServletResponse response) {
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder()
                 .email(loginUserRequest.email())
                 .password(loginUserRequest.password())
                 .build());
 
+
         AuthResponse authResponse = tokenInfoService.doLogin(user);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
-                .header("Refresh-Token", authResponse.refreshToken())
-                .body(authResponse);
+        response.setHeader("Authorization", authResponse.accessToken());
+        response.setHeader("Refresh-Token", authResponse.refreshToken());
+
+        return authResponse;
     }
 
     @PostMapping("/login/none")
@@ -92,5 +94,11 @@ public class AuthController {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
                 .header("Refresh-Token", authResponse.refreshToken())
                 .body(authResponse);
+    }
+
+    @GetMapping("/info")
+    public ReadTokenInfoResponse getUserInfo(@RequestParam String uuid) {
+
+        return tokenInfoService.getByUuid(uuid);
     }
 }

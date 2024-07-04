@@ -106,7 +106,7 @@ public class JwtFilter extends GenericFilterBean {
      */
     private boolean isExcludedPath(String path) {
 
-        return path.startsWith("/auth/login") || path.equals("/users") || path.equals("/auth/refresh");
+        return path.startsWith("/auth/login") || path.equals("/users") || path.equals("/auth/refresh") || path.startsWith("/auth/info");
     }
 
 }
