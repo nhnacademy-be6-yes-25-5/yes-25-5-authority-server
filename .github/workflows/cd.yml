@@ -58,7 +58,6 @@ jobs:
               exit 1
             fi
             docker build -t authority-app .
-            docker network connect yes255-network authority-app
             docker stop authority-app || true
             docker rm authority-app || true
             docker run -d -p 8050:8050 --name authority-app --network yes255-network \
