@@ -1,10 +1,28 @@
 server:
   port: 8050
+  error:
+    include-stacktrace: never
+    include-message: always
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://133.186.241.167:3306/be6_yes255_account
+    username: be6_yes255
+    password: ${YES25_5_MYSQL_PASSWORD}
+    type: org.apache.commons.dbcp2.BasicDataSource
+    dbcp2:
+      initial-size: 10
+      max-total: 10
+      max-idle: 10
+      min-idle: 10
   application:
     name: authority-server
   profiles:
     active: dev
 jwt:
+  access-token:
+    expiration-ms: 30000 # 2분 = 120,000ms
+  refresh-token:
+    expiration-ms: 86400000 # 24시간 = 86,400,000ms
   secret: ${JWT_SECRET}
-  expiration-ms: 1800000
+

@@ -6,10 +6,12 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.Date;
+import java.util.UUID;
 
 /**
- * JWTUtil 클래스는 JSON Web Token(JWT) 생성, 파싱, 검증 기능을 제공하는 유틸리티 클래스입니다.
+ * JWTUtil 클래스는 JSON Web Token(JWT) 생성 기능을 제공하는 유틸리티 클래스입니다.
  *
  * @author lettuce82
  * @version 1.0
@@ -19,8 +21,11 @@ public class JWTUtil {
 
     private final SecretKey secretKey;
 
-    @Value("${jwt.expiration-ms}")
-    private long JWT_EXPIRATION_MS; // 30분
+    @Value("${jwt.access-token.expiration-ms}")
+    private int accessTokenExpiration;
+
+    @Value("${jwt.refresh-token.expiration-ms}")
+    private int refreshTokenExpiration;
 
     /**
      * 제공된 비밀 키를 사용하여 JWTUtil 인스턴스를 생성합니다.
@@ -31,23 +36,23 @@ public class JWTUtil {
         secretKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
-    /**
-     * 제공된 고객 ID, 사용자 역할, 로그인 상태 이름을 포함하는 새로운 JWT 토큰을 생성합니다.
-     *
-     * @param customerId JWT 토큰에 포함할 고객 ID
-     * @param userRole JWT 토큰에 포함할 사용자 역할
-     * @param loginStatusName JWT 토큰에 포함할 로그인 상태 이름
-     * @return 새로 생성된 JWT 토큰
-     */
-    public String createJwt(Long customerId, String userRole, String loginStatusName) {
+    public String createAccessJwt() {
         return Jwts.builder()
-                .setHeaderParam("typ", "JWT")
-                .claim("customerId", customerId)
-                .claim("userRole", userRole)
-                .claim("loginStatusName", loginStatusName)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_MS))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .header().add("typ", "ACCESS_TOKEN").and()
+                .subject(UUID.randomUUID().toString())
+                .issuedAt(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now().plusMillis(accessTokenExpiration)))
+                .signWith(secretKey)
+                .compact();
+    }
+
+    public String createRefrshJwt() {
+        return Jwts.builder()
+                .header().add("typ", "REFRESH_TOKEN").and()
+                .subject(UUID.randomUUID().toString())
+                .issuedAt(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now().plusMillis(refreshTokenExpiration)))
+                .signWith(secretKey)
                 .compact();
     }
 
