@@ -41,7 +41,7 @@ public class AuthController {
      * @return ResponseEntity<AuthResponse> 생성된 JWT 토큰을 포함한 응답
      */
     @PostMapping("/login")
-    public AuthResponse findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest, HttpServletResponse response) {
+    public ResponseEntity<AuthResponse> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest, HttpServletResponse response) {
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder()
                 .email(loginUserRequest.email())
                 .password(loginUserRequest.password())
@@ -53,7 +53,10 @@ public class AuthController {
         response.setHeader("Authorization", authResponse.accessToken());
         response.setHeader("Refresh-Token", authResponse.refreshToken());
 
-        return authResponse;
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
+                .header("Refresh-Token", authResponse.refreshToken())
+                .body(authResponse);
     }
 
     @PostMapping("/login/none")
