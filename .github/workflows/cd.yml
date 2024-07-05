@@ -40,18 +40,6 @@ jobs:
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no Dockerfile ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/Dockerfile
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no pom.xml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/pom.xml
           scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no -r src ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/src
-          scp -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no src/main/resources/application-prod.yml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/src/main/resources/application-prod.yml
-
-      - name: Check Dockerfile on Remote Server
-        env:
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_DIR: ${{ secrets.REMOTE_DIR }}
-        run: |
-          ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/Dockerfile"
-          ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/pom.xml"
-          ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/src"
-          ssh -i ~/.ssh/github_rsa -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "ls -la ${REMOTE_DIR}/src/main/resources/application-prod.yml"
 
       - name: Deploy JAR on Remote Server
         env:
@@ -77,7 +65,6 @@ jobs:
               -e YES25_5_MYSQL_PASSWORD=${YES25_5_MYSQL_PASSWORD} \
               -e EUREKA_SERVER_HOSTNAME=${EUREKA_SERVER_HOSTNAME} \
               -e EUREKA_SERVER_PORT=${EUREKA_SERVER_PORT} \
-              -e YES25_5_MYSQL_PASSWORD=${YES25_5_MYSQL_PASSWORD} \
               -e JWT_SECRET=${JWT_SECRET} \
               authority-app
           EOF
