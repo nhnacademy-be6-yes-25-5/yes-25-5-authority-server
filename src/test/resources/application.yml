@@ -1,32 +1,60 @@
-server:
-  port: 8051
+eureka:
+  client:
+    enabled: true
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+api:
+  book-user: http://localhost:8061
+
+logging:
+  file:
+    path: ${user.dir}/logs/${spring.application.name}
 
 spring:
-  application:
-    name: authority-server
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://133.186.241.167:3306/be6_yes255_account
     username: be6_yes255
-    password: ${YES25_5_MYSQL_PASSWORD}
+    password: n-lGLCu5Zk]5Gu8s
     type: org.apache.commons.dbcp2.BasicDataSource
     dbcp2:
       initial-size: 10
       max-total: 10
       max-idle: 10
       min-idle: 10
+  application:
+    name: authority-server
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        highlight_sql: true
+        auto_quote_keyword: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    generate-ddl: true
+  sql:
+    init:
+      mode: always
 
-eureka:
-  gateway: http://localhost:8085
-
-api:
-  book-user: http://localhost:8085
-
+server:
+  port: 8050
+  error:
+    include-stacktrace: never
+    include-message: always
 jwt:
+  access-token:
+    expiration-ms: 3000000 # 2분 = 120,000ms
+  refresh-token:
+    expiration-ms: 86400000 # 24시간 = 86,400,000ms
   secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
-  expiration-ms: 1800000
-
-logging:
-  file:
-    path: ${user.home}/logs
-
