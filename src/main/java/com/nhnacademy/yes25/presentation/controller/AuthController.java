@@ -10,6 +10,8 @@ import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
  * @author lettuce82
  * @version 1.0
  */
+@Tag(name = "회원 인증 API", description = "회원 인증 관련 API 입니다.")
 @RequestMapping("/auth")
 @RestController
 @RequiredArgsConstructor
@@ -40,6 +43,7 @@ public class AuthController {
      * @param loginUserRequest 사용자의 이메일과 비밀번호를 포함하는 로그인 요청
      * @return ResponseEntity<AuthResponse> 생성된 JWT 토큰을 포함한 응답
      */
+    @Operation(summary = "회원 로그인", description = "로그인 진행 후 Header에 토큰을 담아 반환합니다.")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest, HttpServletResponse response) {
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder()
@@ -59,6 +63,7 @@ public class AuthController {
                 .body(authResponse);
     }
 
+    @Operation(summary = "비회원 로그인", description = "비회원 로그인 진행 후 Header에 토큰을 담아 반환합니다.")
     @PostMapping("/login/none")
     public ResponseEntity<NoneMemberLoginResponse> findLoginUserByEmail(@RequestBody NoneMemberLoginRequest request) {
         NoneMemberLoginResponse authResponse = tokenInfoService.doLoginNoneMember(request);
@@ -76,6 +81,7 @@ public class AuthController {
      * @param jwtUserDetails 현재 인증된 사용자의 상세 정보
      * @return ResponseEntity<String> 인증된 사용자의 username
      */
+    @Operation(summary = "테스트", description = "데모 기능입니다.")
     @GetMapping("/test")
     public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
         return ResponseEntity.ok(jwtUserDetails.getUsername());
@@ -87,6 +93,7 @@ public class AuthController {
      * @param expiredAccessJwt
      * @return ResponseEntity<AuthResponse> 새로 발급된 액세스 토큰과 리프레시 토큰을 포함한 응답
      */
+    @Operation(summary = "access token 재발급", description = "access token 재발급 후 Header에 재발급된 토큰을 담아 반환합니다.")
     @GetMapping("/refresh")
     public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader("Authorization") String expiredAccessJwt) {
 
@@ -100,6 +107,7 @@ public class AuthController {
     }
 
     @GetMapping("/info")
+    @Operation(summary = "토큰 회원 정보", description = "토큰 sub를 이용하여 회원 정보를 반환합니다.")
     public ReadTokenInfoResponse getUserInfo(@RequestParam String uuid) {
 
         return tokenInfoService.getByUuid(uuid);
