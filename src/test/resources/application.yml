@@ -10,6 +10,7 @@ eureka:
 
 api:
   book-user: http://localhost:8061
+  dooray: https://hook.dooray.com/services/3204376758577275363/3824312399885046720/ZqH6q36TRc6JoU4aGrKTNA
 
 logging:
   file:
@@ -46,6 +47,12 @@ spring:
   sql:
     init:
       mode: always
+  data:
+    redis:
+      host: 133.186.241.167
+      port: 6379
+      database: 16
+      password: "*N2vya7H@muDTwdNMR!"
 
 server:
   port: 8050

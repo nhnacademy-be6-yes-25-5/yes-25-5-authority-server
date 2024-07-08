@@ -19,10 +19,25 @@ spring:
     name: authority-server
   profiles:
     active: dev
+  data:
+    redis:
+      host: 133.186.241.167
+      port: 6379
+      database: 16
+      password: "*N2vya7H@muDTwdNMR!"
+
 jwt:
   access-token:
     expiration-ms: 3000000 # 2분 = 120,000ms
   refresh-token:
     expiration-ms: 86400000 # 24시간 = 86,400,000ms
   secret: ${JWT_SECRET}
+api:
+  dooray: https://hook.dooray.com/services/3204376758577275363/3824312399885046720/ZqH6q36TRc6JoU4aGrKTNA
 
+redisson:
+  config: |
+    singleServerConfig:
+      address: "redis://133.186.241.167:6379"
+      password: "*N2vya7H@muDTwdNMR!"
+      database: 16
