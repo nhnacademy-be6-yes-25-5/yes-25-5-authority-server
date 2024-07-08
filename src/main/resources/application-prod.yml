@@ -8,6 +8,7 @@ eureka:
 
 api:
   book-user: ${EUREKA_SERVER_HOSTNAME}:8060
+  front: ${EUREKA_SERVER_HOSTNAME}:8040
 
 logging:
   file:

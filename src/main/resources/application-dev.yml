@@ -10,6 +10,7 @@ eureka:
 
 api:
   book-user: http://localhost:8061
+  front: http://localhost:8040
 
 logging:
   file:

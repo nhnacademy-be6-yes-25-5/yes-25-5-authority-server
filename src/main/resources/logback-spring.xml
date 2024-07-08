@@ -84,7 +84,7 @@
     </appender>
 
     <!-- root 로거 설정 -->
-    <root level="INFO">
+    <root level="DEBUG">
         <!-- 콘솔에 로그 출력 -->
         <appender-ref ref="CONSOLE"/>
         <!-- 모든 레벨 로그 파일에 기록 -->
