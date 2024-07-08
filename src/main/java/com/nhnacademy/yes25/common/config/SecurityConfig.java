@@ -26,6 +26,9 @@ public class SecurityConfig {
                     .requestMatchers("/auth/login", "/users/**", "/auth/refresh",
                         "/auth/login/none", "/auth/info").permitAll()
                     .requestMatchers("/auth/dormant/**").permitAll()
+                    .requestMatchers("/authority/v3/**").permitAll()
+                    .requestMatchers("/authority/swagger-ui.html").permitAll()
+                    .requestMatchers("/authority/swagger-ui/**").permitAll()
                     .anyRequest().authenticated());
 
         return http.build();

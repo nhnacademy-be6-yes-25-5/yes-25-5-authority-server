@@ -105,9 +105,9 @@ public class JwtFilter extends GenericFilterBean {
      * @return 제외 경로인 경우 true, 그렇지 않으면 false
      */
     private boolean isExcludedPath(String path) {
-
         return path.startsWith("/auth/login") || path.equals("/users") || path.equals("/auth/refresh") || path.startsWith("/auth/info")
-            || path.startsWith("/auth/dormant");
+            || path.startsWith("/auth/dormant") || path.startsWith("/authority/v3/api-docs") || path.matches("/authority/swagger-ui/index.html")
+                || path.matches("/authority/swagger-ui.html") || path.startsWith("/authority/swagger-ui");
     }
 
 }
