@@ -90,15 +90,14 @@ public class AuthController {
     /**
      * 만료된 액세스 토큰을 갱신합니다.
      *
-     * @param expiredAccessJwt
+     * @param refreshToken
      * @return ResponseEntity<AuthResponse> 새로 발급된 액세스 토큰과 리프레시 토큰을 포함한 응답
      */
     @Operation(summary = "access token 재발급", description = "access token 재발급 후 Header에 재발급된 토큰을 담아 반환합니다.")
     @GetMapping("/refresh")
-    public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader("Authorization") String expiredAccessJwt) {
+    public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader("Refresh-Token") String refreshToken) {
 
-        expiredAccessJwt = expiredAccessJwt.replace("Bearer ", "");
-        CreateAccessTokenRequest createAccessTokenRequest = new CreateAccessTokenRequest(expiredAccessJwt);
+        CreateAccessTokenRequest createAccessTokenRequest = new CreateAccessTokenRequest(refreshToken);
         AuthResponse authResponse = tokenInfoService.updateAccessToken(createAccessTokenRequest);
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())

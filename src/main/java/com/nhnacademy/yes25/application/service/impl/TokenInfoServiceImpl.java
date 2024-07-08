@@ -1,7 +1,7 @@
 package com.nhnacademy.yes25.application.service.impl;
 
 import com.nhnacademy.yes25.application.service.TokenInfoService;
-import com.nhnacademy.yes25.common.exception.UuidMisMatchException;
+import com.nhnacademy.yes25.common.exception.refreshTokenMisMatchException;
 import com.nhnacademy.yes25.common.exception.CustomerIdMisMatchException;
 import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
 import com.nhnacademy.yes25.common.jwt.JwtProvider;
@@ -20,6 +20,7 @@ import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -31,6 +32,7 @@ import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TokenInfoServiceImpl implements TokenInfoService {
 
     @PersistenceContext
@@ -46,18 +48,14 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      * @param user 인증된 사용자 정보
      * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
      */
-    @Transactional
     @Override
     public AuthResponse doLogin(LoginUserResponse user) {
+        deleteExistingTokenInfo(user.userId());
 
+        // 새로운 토큰 정보 생성
         String accessJwt = jwtUtil.createAccessJwt();
         String refreshJwt = jwtUtil.createRefrshJwt();
-        Long customerId = user.userId();
-
-        deleteAndClear(customerId);
-
         createTokenInfo(user, accessJwt, refreshJwt);
-
 
         return AuthResponse.builder()
                 .accessToken(accessJwt)
@@ -65,19 +63,26 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .build();
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void deleteExistingTokenInfo(Long customerId) {
+        tokenInfoRepository.deleteAllByCustomerId(customerId);
+    }
+
+
     /**
      * 사용자 로그인을 처리하고 새로운 AccessToken과 RefreshToken을 발급합니다.
      *
      * @param request 비회원 사용자의 id
      * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
      */
-    @Transactional
     @Override
     public NoneMemberLoginResponse doLoginNoneMember(NoneMemberLoginRequest request) {
+
+        // 기존 토큰 정보 삭제
+        tokenInfoRepository.deleteAllByCustomerId(request.customerId());
+
         String accessJwt = jwtUtil.createAccessJwt();
         String refreshJwt = jwtUtil.createRefrshJwt();
-
-        deleteAndClear(request.customerId());
 
         createTokenInfoNoneMember(request, accessJwt, refreshJwt);
 
@@ -98,10 +103,11 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      * @param accessJwt  새로 발급된 AccessToken
      * @param refreshJwt 새로 발급된 RefreshToken
      */
-    @Transactional
-    @Override
     public void createTokenInfo(LoginUserResponse user, String accessJwt, String refreshJwt) {
+        // 기존 토큰 정보 삭제
+        tokenInfoRepository.deleteAllByCustomerId(user.userId());
 
+        // 새로운 토큰 정보 생성
         CreateTokenInfoRequest createRequest = CreateTokenInfoRequest.builder()
                 .uuid(jwtProvider.getUuidFromToken(accessJwt))
                 .customerId(user.userId())
@@ -112,11 +118,9 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .updateAt(ZonedDateTime.now())
                 .build();
 
-        saveAndClear(createRequest);
-
+        tokenInfoRepository.save(createRequest.toEntity());
     }
 
-    @Transactional
     @Override
     public void createTokenInfoNoneMember(NoneMemberLoginRequest request, String accessJwt, String refreshJwt) {
 
@@ -142,7 +146,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     @Override
     public ReadTokenInfoResponse getByUuid(String uuid) {
         TokenInfo tokenInfo = tokenInfoRepository.findByUuid(uuid)
-                .orElseThrow(() -> new UuidMisMatchException(
+                .orElseThrow(() -> new refreshTokenMisMatchException(
                                 new ErrorStatus("해당 UUID를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
@@ -171,7 +175,6 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      *
      * @param updateRequest 토큰 정보 업데이트 요청 객체
      */
-    @Transactional
     @Override
     public void updateTokenInfo(UpdateTokenInfoRequest updateRequest) {
         tokenInfoRepository.save(updateRequest.toEntity());
@@ -182,16 +185,15 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      *
      * @param createAccessTokenRequest 만료된 AccessToken 정보를 포함한 요청 객체
      * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
-     * @throws UuidMisMatchException 토큰 정보를 찾을 수 없을 때 발생한 예외
+     * @throws refreshTokenMisMatchException 토큰 정보를 찾을 수 없을 때 발생한 예외
      */
-    @Transactional
     @Override
     public AuthResponse updateAccessToken(CreateAccessTokenRequest createAccessTokenRequest) {
 
-        String uuid = jwtProvider.getUuidFromToken(createAccessTokenRequest.expiredAccessJwt());
-        TokenInfo tokenInfo = tokenInfoRepository.findByUuid(uuid)
-                .orElseThrow(() -> new UuidMisMatchException(
-                                new ErrorStatus("해당 uuid로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
+
+        TokenInfo tokenInfo = tokenInfoRepository.findByRefreshToken(createAccessTokenRequest.refreshToken())
+                .orElseThrow(() -> new refreshTokenMisMatchException(
+                                new ErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
 
@@ -221,7 +223,6 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      *
      * @param uuid UUID
      */
-    @Transactional
     @Override
     public void removeTokenInfoByUuid(String uuid) {
         tokenInfoRepository.deleteByUuid(uuid);
@@ -232,24 +233,9 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      *
      * @param customerId 고객 ID
      */
-    @Transactional
     @Override
     public void removeTokenAllInfoByCustomerId(Long customerId) {
         tokenInfoRepository.deleteAllByCustomerId(customerId);
-    }
-
-    @Transactional
-    public void deleteAndClear(Long customerId) {
-        tokenInfoRepository.deleteAllByCustomerId(customerId);
-        entityManager.flush();
-        entityManager.clear();
-    }
-
-    @Transactional
-    public void saveAndClear(CreateTokenInfoRequest createRequest) {
-        tokenInfoRepository.save(createRequest.toEntity());
-        entityManager.flush();
-        entityManager.clear();
     }
 
 }
