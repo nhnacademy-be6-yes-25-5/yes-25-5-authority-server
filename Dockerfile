@@ -7,6 +7,8 @@ FROM maven:3.8.8-eclipse-temurin-21
 
 # Set the working directory
 # 이 부분 사용자의 디렉토리에 맞게 수정
+RUN apt-get update && apt-get install -y tzdata && \
+    ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && echo "Asia/Seoul" > /etc/timezone \
 WORKDIR /authority
 
 # Copy the pom.xml and download dependencies

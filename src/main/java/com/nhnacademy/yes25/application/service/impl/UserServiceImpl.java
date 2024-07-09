@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginUserResponse findUserByEmailAndPassword(LoginUserRequest loginUserRequest) {
-        return userAdaptor.findLoginUserByEmailAndPassword(loginUserRequest);
+        return userAdaptor.findLoginUserByEmailAndPassword(loginUserRequest).getBody();
     }
 
 }

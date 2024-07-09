@@ -4,13 +4,13 @@ eureka:
     fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
   instance:
-    hostname: localhost
+    hostname: 127.0.0.1
 
 api:
-  book-user: http://localhost:8061
-  front: http://localhost:8040
+  book-user: http://127.0.0.1:8061
+  front: http://127.0.0.1:8040
 
 logging:
   file:
