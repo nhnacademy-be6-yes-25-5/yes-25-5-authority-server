@@ -54,7 +54,7 @@ public class AuthController {
 
         AuthResponse authResponse = tokenInfoService.doLogin(user);
 
-        response.setHeader("Authorization", authResponse.accessToken());
+        response.setHeader("Authorization", "Bearer " + authResponse.accessToken());
         response.setHeader("Refresh-Token", authResponse.refreshToken());
 
         return ResponseEntity.ok()

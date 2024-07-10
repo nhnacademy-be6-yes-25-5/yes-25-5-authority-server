@@ -55,7 +55,7 @@ public class TokenAspect {
         if (result instanceof ResponseEntity<?> responseEntity) {
 
             if (isNotEmptyTokens(accessJwt, refreshJwt)) {
-                response.setHeader(HttpHeaders.AUTHORIZATION, accessJwt);
+                response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " +accessJwt);
                 response.setHeader("Refresh-Token", refreshJwt);
             }
 
