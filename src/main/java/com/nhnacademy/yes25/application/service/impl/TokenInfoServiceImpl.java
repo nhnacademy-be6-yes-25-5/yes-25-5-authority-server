@@ -145,11 +145,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     @Transactional(readOnly = true)
     @Override
     public ReadTokenInfoResponse getByUuid(String uuid) {
+
         TokenInfo tokenInfo = tokenInfoRepository.findByUuid(uuid)
                 .orElseThrow(() -> new refreshTokenMisMatchException(
-                                new ErrorStatus("해당 UUID를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                        ErrorStatus.toErrorStatus("해당 UUID로 Token Info를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
+
         return ReadTokenInfoResponse.fromEntity(tokenInfo);
     }
 
@@ -162,11 +164,13 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     @Transactional(readOnly = true)
     @Override
     public ReadTokenInfoResponse getByCustomerId(Long customerId) {
+
         TokenInfo tokenInfo = tokenInfoRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new CustomerIdMisMatchException(
-                                new ErrorStatus("해당 CustomerId를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                .orElseThrow(() -> new CustomerIdMisMatchException(ErrorStatus.toErrorStatus(
+                        "해당 CustomerId를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
+
         return ReadTokenInfoResponse.fromEntity(tokenInfo);
     }
 
@@ -193,7 +197,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         TokenInfo tokenInfo = tokenInfoRepository.findByRefreshToken(createAccessTokenRequest.refreshToken())
                 .orElseThrow(() -> new refreshTokenMisMatchException(
-                                new ErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                        ErrorStatus.toErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
 

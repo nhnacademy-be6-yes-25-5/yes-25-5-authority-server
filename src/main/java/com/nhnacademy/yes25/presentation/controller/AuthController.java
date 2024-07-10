@@ -2,8 +2,8 @@ package com.nhnacademy.yes25.presentation.controller;
 
 import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
-import com.nhnacademy.yes25.common.jwt.JwtUserDetails;
-import com.nhnacademy.yes25.common.jwt.annotation.CurrentUser;
+import com.nhnacademy.yes25.common.exception.JwtException;
+import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
 import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
@@ -74,18 +74,18 @@ public class AuthController {
                 .body(authResponse);
     }
 
-    /**
-     * 토큰의 유효성을 테스트합니다.
-     * 현재 인증된 사용자의 정보를 반환합니다.
-     *
-     * @param jwtUserDetails 현재 인증된 사용자의 상세 정보
-     * @return ResponseEntity<String> 인증된 사용자의 username
-     */
-    @Operation(summary = "테스트", description = "데모 기능입니다.")
-    @GetMapping("/test")
-    public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
-        return ResponseEntity.ok(jwtUserDetails.getUsername());
-    }
+//    /**
+//     * 토큰의 유효성을 테스트합니다.
+//     * 현재 인증된 사용자의 정보를 반환합니다.
+//     *
+//     * @param jwtUserDetails 현재 인증된 사용자의 상세 정보
+//     * @return ResponseEntity<String> 인증된 사용자의 username
+//     */
+//    @Operation(summary = "테스트", description = "데모 기능입니다.")
+//    @GetMapping("/test")
+//    public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
+//        return ResponseEntity.ok(jwtUserDetails.getUsername());
+//    }
 
     /**
      * 만료된 액세스 토큰을 갱신합니다.
