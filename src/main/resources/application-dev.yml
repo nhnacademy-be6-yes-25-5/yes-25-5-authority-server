@@ -17,6 +17,9 @@ logging:
     path: ${user.dir}/logs/${spring.application.name}
 
 spring:
+  config:
+    activate:
+      on-profile: dev
   jpa:
     open-in-view: false
     show-sql: true
