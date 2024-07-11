@@ -16,6 +16,9 @@ logging:
 
 
 spring:
+  config:
+    activate:
+      on-profile: prod
   jpa:
     open-in-view: false
     show-sql: true
