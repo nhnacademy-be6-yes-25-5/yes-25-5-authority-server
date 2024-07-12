@@ -148,7 +148,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         TokenInfo tokenInfo = tokenInfoRepository.findByUuid(uuid)
                 .orElseThrow(() -> new refreshTokenMisMatchException(
-                        ErrorStatus.toErrorStatus("해당 UUID로 Token Info를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                                ErrorStatus.toErrorStatus("해당 UUID로 Token Info를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
 
@@ -167,7 +167,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         TokenInfo tokenInfo = tokenInfoRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new CustomerIdMisMatchException(ErrorStatus.toErrorStatus(
-                        "해당 CustomerId를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                                "해당 CustomerId를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
 
@@ -197,7 +197,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
 
         TokenInfo tokenInfo = tokenInfoRepository.findByRefreshToken(createAccessTokenRequest.refreshToken())
                 .orElseThrow(() -> new refreshTokenMisMatchException(
-                        ErrorStatus.toErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
+                                ErrorStatus.toErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
                         )
                 );
 

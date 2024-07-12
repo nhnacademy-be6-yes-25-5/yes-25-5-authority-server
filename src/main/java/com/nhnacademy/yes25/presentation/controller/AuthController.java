@@ -2,8 +2,6 @@ package com.nhnacademy.yes25.presentation.controller;
 
 import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
-import com.nhnacademy.yes25.common.exception.JwtException;
-import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
 import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
@@ -46,6 +44,7 @@ public class AuthController {
     @Operation(summary = "회원 로그인", description = "로그인 진행 후 Header에 토큰을 담아 반환합니다.")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> findLoginUserByEmail(@RequestBody LoginUserRequest loginUserRequest, HttpServletResponse response) {
+
         LoginUserResponse user = userService.findUserByEmailAndPassword(LoginUserRequest.builder()
                 .email(loginUserRequest.email())
                 .password(loginUserRequest.password())
@@ -66,6 +65,7 @@ public class AuthController {
     @Operation(summary = "비회원 로그인", description = "비회원 로그인 진행 후 Header에 토큰을 담아 반환합니다.")
     @PostMapping("/login/none")
     public ResponseEntity<NoneMemberLoginResponse> findLoginUserByEmail(@RequestBody NoneMemberLoginRequest request) {
+
         NoneMemberLoginResponse authResponse = tokenInfoService.doLoginNoneMember(request);
 
         return ResponseEntity.ok()
@@ -73,19 +73,6 @@ public class AuthController {
                 .header("Refresh-Token", authResponse.refreshToken())
                 .body(authResponse);
     }
-
-//    /**
-//     * 토큰의 유효성을 테스트합니다.
-//     * 현재 인증된 사용자의 정보를 반환합니다.
-//     *
-//     * @param jwtUserDetails 현재 인증된 사용자의 상세 정보
-//     * @return ResponseEntity<String> 인증된 사용자의 username
-//     */
-//    @Operation(summary = "테스트", description = "데모 기능입니다.")
-//    @GetMapping("/test")
-//    public ResponseEntity<String> tokenTest(@CurrentUser JwtUserDetails jwtUserDetails) {
-//        return ResponseEntity.ok(jwtUserDetails.getUsername());
-//    }
 
     /**
      * 만료된 액세스 토큰을 갱신합니다.
@@ -99,6 +86,7 @@ public class AuthController {
 
         CreateAccessTokenRequest createAccessTokenRequest = new CreateAccessTokenRequest(refreshToken);
         AuthResponse authResponse = tokenInfoService.updateAccessToken(createAccessTokenRequest);
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
                 .header("Refresh-Token", authResponse.refreshToken())
@@ -108,7 +96,6 @@ public class AuthController {
     @GetMapping("/info")
     @Operation(summary = "토큰 회원 정보", description = "토큰 sub를 이용하여 회원 정보를 반환합니다.")
     public ReadTokenInfoResponse getUserInfo(@RequestParam String uuid) {
-
         return tokenInfoService.getByUuid(uuid);
     }
 }
