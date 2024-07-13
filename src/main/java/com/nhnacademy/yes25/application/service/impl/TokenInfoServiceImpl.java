@@ -48,6 +48,7 @@ public class TokenInfoServiceImpl implements TokenInfoService {
      * @param user 인증된 사용자 정보
      * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
      */
+
     @Override
     public AuthResponse doLogin(LoginUserResponse user) {
         deleteExistingTokenInfo(user.userId());
