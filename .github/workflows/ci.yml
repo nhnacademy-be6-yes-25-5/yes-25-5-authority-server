@@ -29,8 +29,8 @@ jobs:
         run: |
           docker run --rm authority-app mvn clean verify sonar:sonar \
           -Dspring.profile.active=ci \
-          -Dsonar.projectKey=yes-25-5-authority \
-          -Dsonar.projectName='yes-25-5-authority' \
+          -Dsonar.projectKey=yes25.5-authority-server-final \
+          -Dsonar.projectName='yes25.5-authority-server-final' \
           -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
