@@ -11,6 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.nhnacademy.yes25.application.service.impl.TokenInfoDeletionServiceImpl;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -79,7 +82,9 @@ class TokenInfoDeletionServiceImplTest {
         // then
         // 트랜잭션 전파 설정 확인 (메타데이터 확인)
         Transactional transactional = TokenInfoDeletionServiceImpl.class.getMethod("deleteExistingUserInfo", String.class).getAnnotation(Transactional.class);
-        assert transactional != null;
-        assert transactional.propagation() == Propagation.REQUIRES_NEW;
+
+        // Add assertion
+        assertNotNull(transactional, "Transactional annotation should be present");
+        assertEquals(Propagation.REQUIRES_NEW, transactional.propagation(), "Propagation should be REQUIRES_NEW");
     }
 }
