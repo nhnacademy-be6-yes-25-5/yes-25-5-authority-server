@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
-import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
 import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,23 +55,6 @@ class AuthControllerTest {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isOk())
-                .andExpect(header().string("Authorization", "Bearer accessToken"))
-                .andExpect(header().string("Refresh-Token", "refreshToken"))
-                .andExpect(jsonPath("$.accessToken").value("accessToken"))
-                .andExpect(jsonPath("$.refreshToken").value("refreshToken"));
-    }
-
-    @Test
-    void findLoginUserByEmail_NoneMember_ShouldReturnNoneMemberLoginResponse() throws Exception {
-        NoneMemberLoginRequest request = new NoneMemberLoginRequest(2L,  "ROLE_NONE_MEMBER");
-        NoneMemberLoginResponse response = new NoneMemberLoginResponse("accessToken", "refreshToken", 2L, "ROLE_NONE_MEMBER");
-
-        when(tokenInfoService.doLoginNoneMember(any(NoneMemberLoginRequest.class))).thenReturn(response);
-
-        mockMvc.perform(post("/auth/login/none")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(header().string("Authorization", "Bearer accessToken"))
                 .andExpect(header().string("Refresh-Token", "refreshToken"))

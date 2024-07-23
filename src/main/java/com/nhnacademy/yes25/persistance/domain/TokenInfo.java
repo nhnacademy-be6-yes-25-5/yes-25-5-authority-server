@@ -2,51 +2,31 @@ package com.nhnacademy.yes25.persistance.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "token_info")
+@NoArgsConstructor
+@Table(name = "token")
 public class TokenInfo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String uuid;
 
-    @Column(nullable = false, unique = true)
-    private Long customerId;
-
-    @Column(nullable = false)
-    private String role;
-
-    @Column(nullable = false)
-    private String loginStateName;
-
-    @Column(nullable = false)
+    @Column(nullable = false, name = "refresh_token")
     private String refreshToken;
 
-    @Column(nullable = false, name = "create_at")
-    private ZonedDateTime createdAt;
-
-    @Column(nullable = false, name = "update_at")
-    private ZonedDateTime updatedAt;
+    @Column(nullable = false, name = "expiry_date")
+    private LocalDateTime expiryDate;
 
     @Builder
-    public TokenInfo(Long id, String uuid, Long customerId, String role,
-                     String loginStateName, String refreshToken,
-                     ZonedDateTime createdAt, ZonedDateTime updatedAt) {
+    public TokenInfo(Long id, String uuid, String refreshToken, LocalDateTime expiryDate) {
         this.id = id;
         this.uuid = uuid;
-        this.customerId = customerId;
-        this.role = role;
-        this.loginStateName = loginStateName;
         this.refreshToken = refreshToken;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.expiryDate = expiryDate;
     }
-
 }

@@ -1,34 +1,36 @@
 package com.nhnacademy.yes25.application.service;
 
+import com.nhnacademy.yes25.persistance.domain.TokenInfo;
+import com.nhnacademy.yes25.persistance.domain.UserInfo;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
-import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
-import com.nhnacademy.yes25.presentation.dto.request.UpdateTokenInfoRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
 import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface TokenInfoService {
 
     AuthResponse doLogin(LoginUserResponse user);
 
-    NoneMemberLoginResponse doLoginNoneMember(NoneMemberLoginRequest request);
+    void deleteExistingUserData(Long customerId);
 
-    void createTokenInfo(LoginUserResponse user, String accessJwt, String refreshJwt);
+    void createTokenInfo(String uuid, String refreshJwt);
 
-    AuthResponse updateAccessToken(CreateAccessTokenRequest request);
-
-    @Transactional
-    void createTokenInfoNoneMember(NoneMemberLoginRequest request, String accessJwt, String refreshJwt);
+    void createUserInfo(LoginUserResponse user, String uuid);
 
     ReadTokenInfoResponse getByUuid(String uuid);
 
-    ReadTokenInfoResponse getByCustomerId(Long customerId);
+    AuthResponse updateAccessToken(CreateAccessTokenRequest createAccessTokenRequest);
 
-    void updateTokenInfo(UpdateTokenInfoRequest updateRequest);
+    TokenInfo getTokenInfoByUuid(String uuid);
 
-    void removeTokenInfoByUuid(String uuid);
+    UserInfo getUserInfoByUuid(String uuid);
 
-    void removeTokenAllInfoByCustomerId(Long customerId);
+    TokenInfo getTokenInfoByRefreshToken(String refreshToken);
+
+    void updateTokenInfo(TokenInfo oldTokenInfo, String newUuid, String newRefreshJwt);
+
+    void updateUserInfo(String oldUuid, String newUuid);
+
+    void cleanupExpiredTokens();
+
 }
