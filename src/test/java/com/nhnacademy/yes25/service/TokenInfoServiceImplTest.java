@@ -72,6 +72,49 @@ class TokenInfoServiceImplTest {
                 .build();
     }
 
+    @DisplayName("토큰 정보 생성 - 성공")
+    @Test
+    void createTokenInfo_success() {
+        // given
+        String uuid = "test-uuid";
+        String refreshJwt = "test-refresh-jwt";
+        LocalDateTime expirationDate = LocalDateTime.now().plusDays(7);
+        when(jwtProvider.getExpirationDateFromToken(refreshJwt)).thenReturn(expirationDate);
+
+        // when
+        tokenInfoService.createTokenInfo(uuid, refreshJwt);
+
+        // then
+        verify(tokenInfoRepository, times(1)).save(argThat(tokenInfo ->
+                tokenInfo.getUuid().equals(uuid) &&
+                        tokenInfo.getRefreshToken().equals(refreshJwt) &&
+                        tokenInfo.getExpiryDate().equals(expirationDate)
+        ));
+    }
+
+    @DisplayName("사용자 정보 생성 - 성공")
+    @Test
+    void createUserInfo_success() {
+        // given
+        LoginUserResponse user = LoginUserResponse.builder()
+                .userId(1L)
+                .userRole("ROLE_USER")
+                .loginStatusName("ACTIVE")
+                .build();
+        String uuid = "test-uuid";
+
+        // when
+        tokenInfoService.createUserInfo(user, uuid);
+
+        // then
+        verify(userInfoRepository, times(1)).save(argThat(userInfo ->
+                userInfo.getUuid().equals(uuid) &&
+                        userInfo.getCustomerId().equals(user.userId()) &&
+                        userInfo.getRole().equals(user.userRole()) &&
+                        userInfo.getLoginStateName().equals(user.loginStatusName())
+        ));
+    }
+
     @DisplayName("사용자 로그인 - 성공")
     @Test
     void doLogin_success() {
@@ -154,6 +197,27 @@ class TokenInfoServiceImplTest {
         assertThrows(refreshTokenMisMatchException.class,
                 () -> tokenInfoService.updateAccessToken(createAccessTokenRequest));
     }
+
+    @DisplayName("기존 사용자 데이터 삭제 - 성공")
+    @Test
+    void deleteExistingUserData_success() {
+        // given
+        Long customerId = 1L;
+        UserInfo existingUserInfo = UserInfo.builder()
+                .uuid("existing-uuid")
+                .customerId(customerId)
+                .build();
+        when(userInfoRepository.findByCustomerId(customerId)).thenReturn(Optional.of(existingUserInfo));
+
+        // when
+        tokenInfoService.deleteExistingUserData(customerId);
+
+        // then
+        verify(deletionService, times(1)).deleteExistingTokenInfo("existing-uuid");
+        verify(deletionService, times(1)).deleteExistingUserInfo("existing-uuid");
+    }
+
+
 
     @DisplayName("만료된 토큰 정리 - 성공")
     @Test
