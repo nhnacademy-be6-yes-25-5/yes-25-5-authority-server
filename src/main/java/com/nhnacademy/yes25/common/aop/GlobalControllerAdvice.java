@@ -15,9 +15,12 @@ public class GlobalControllerAdvice {
 
     @ControllerAdvice
     public static class GlobalExceptionHandler {
+
         @ExceptionHandler(ApplicationException.class)
         public ResponseEntity<ErrorStatus> handleException(ApplicationException e) {
+
             ErrorStatus errorStatus = e.getErrorStatus();
+
             return new ResponseEntity<>(errorStatus, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

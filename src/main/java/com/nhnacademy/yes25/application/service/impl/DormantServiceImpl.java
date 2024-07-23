@@ -24,7 +24,6 @@ public class DormantServiceImpl implements DormantService {
 
     private final DoorayAdaptor doorayAdaptor;
     private final UserAdaptor userAdaptor;
-
     private final RedissonClient redissonClient;
     private final SecureRandom random;
 

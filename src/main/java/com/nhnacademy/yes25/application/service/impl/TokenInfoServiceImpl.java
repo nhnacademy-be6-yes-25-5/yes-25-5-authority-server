@@ -5,58 +5,56 @@ import com.nhnacademy.yes25.common.exception.refreshTokenMisMatchException;
 import com.nhnacademy.yes25.common.exception.CustomerIdMisMatchException;
 import com.nhnacademy.yes25.common.exception.payload.ErrorStatus;
 import com.nhnacademy.yes25.common.jwt.JwtProvider;
-import com.nhnacademy.yes25.common.provider.JWTUtil;
 import com.nhnacademy.yes25.persistance.domain.TokenInfo;
+import com.nhnacademy.yes25.persistance.domain.UserInfo;
 import com.nhnacademy.yes25.persistance.repository.TokenInfoRepository;
+import com.nhnacademy.yes25.persistance.repository.UserInfoRepository;
 import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
-import com.nhnacademy.yes25.presentation.dto.request.CreateTokenInfoRequest;
-import com.nhnacademy.yes25.presentation.dto.request.NoneMemberLoginRequest;
-import com.nhnacademy.yes25.presentation.dto.request.UpdateTokenInfoRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
 import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import com.nhnacademy.yes25.presentation.dto.response.NoneMemberLoginResponse;
+import java.util.List;
 
 /**
- * 토큰 기반으로 약식의 회원 정보 관리를 위한 서비스 구현 클래스입니다.
+ * TokenInfoServiceImpl 클래스는 토큰 기반의 회원 정보 관리를 위한 서비스를 구현합니다.
+ * 이 클래스는 로그인, 토큰 생성, 토큰 갱신, 회원 정보 조회 등의 기능을 제공합니다.
+ *
+ * @author Chaesanghui
+ * @version 1.0
  */
 @Slf4j
+@Transactional
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class TokenInfoServiceImpl implements TokenInfoService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private final JWTUtil jwtUtil;
     private final JwtProvider jwtProvider;
     private final TokenInfoRepository tokenInfoRepository;
+    private final UserInfoRepository userInfoRepository;
+    private final TokenInfoDeletionServiceImpl deletionService;
 
     /**
-     * 사용자 로그인을 처리하고 새로운 AccessToken과 RefreshToken을 발급합니다.
+     * 사용자 로그인을 처리하고 인증 토큰을 생성합니다.
      *
-     * @param user 인증된 사용자 정보
-     * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
+     * @param user 로그인한 사용자 정보
+     * @return AuthResponse 생성된 액세스 토큰과 리프레시 토큰을 포함한 응답
      */
-
     @Override
     public AuthResponse doLogin(LoginUserResponse user) {
-        deleteExistingTokenInfo(user.userId());
 
-        // 새로운 토큰 정보 생성
-        String accessJwt = jwtUtil.createAccessJwt();
-        String refreshJwt = jwtUtil.createRefrshJwt();
-        createTokenInfo(user, accessJwt, refreshJwt);
+        deleteExistingUserData(user.userId());
+        String accessJwt = jwtProvider.createAccessJwt();
+        String refreshJwt = jwtProvider.createRefreshJwt();
+        String uuid = jwtProvider.getUuidFromToken(accessJwt);
+
+        createTokenInfo(uuid, refreshJwt);
+        createUserInfo(user, uuid);
 
         return AuthResponse.builder()
                 .accessToken(accessJwt)
@@ -64,158 +62,87 @@ public class TokenInfoServiceImpl implements TokenInfoService {
                 .build();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void deleteExistingTokenInfo(Long customerId) {
-        tokenInfoRepository.deleteAllByCustomerId(customerId);
-    }
-
-
     /**
-     * 사용자 로그인을 처리하고 새로운 AccessToken과 RefreshToken을 발급합니다.
+     * 기존 사용자 데이터를 삭제합니다.
      *
-     * @param request 비회원 사용자의 id
-     * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
+     * @param customerId 삭제할 사용자의 ID
      */
     @Override
-    public NoneMemberLoginResponse doLoginNoneMember(NoneMemberLoginRequest request) {
-
-        // 기존 토큰 정보 삭제
-        tokenInfoRepository.deleteAllByCustomerId(request.customerId());
-
-        String accessJwt = jwtUtil.createAccessJwt();
-        String refreshJwt = jwtUtil.createRefrshJwt();
-
-        createTokenInfoNoneMember(request, accessJwt, refreshJwt);
-
-        ReadTokenInfoResponse tokenInfo = getByCustomerId(request.customerId());
-
-        return NoneMemberLoginResponse.builder()
-                .accessToken(accessJwt)
-                .refreshToken(refreshJwt)
-                .customerId(request.customerId())
-                .role(tokenInfo.role()).build();
+    public void deleteExistingUserData(Long customerId) {
+        userInfoRepository.findByCustomerId(customerId).ifPresent(userInfo -> {
+            deletionService.deleteExistingTokenInfo(userInfo.getUuid());
+            deletionService.deleteExistingUserInfo(userInfo.getUuid());
+        });
     }
 
+    /**
+     * 토큰 정보를 생성하고 저장합니다.
+     *
+     * @param uuid UUID
+     * @param refreshJwt 리프레시 토큰
+     */
+    @Override
+    public void createTokenInfo(String uuid, String refreshJwt) {
+        TokenInfo tokenInfo = TokenInfo.builder()
+                .uuid(uuid)
+                .refreshToken(refreshJwt)
+                .expiryDate(jwtProvider.getExpirationDateFromToken(refreshJwt))
+                .build();
+        tokenInfoRepository.save(tokenInfo);
+    }
 
     /**
-     * 토큰 정보를 생성합니다.
+     * 사용자 정보를 생성하고 저장합니다.
      *
-     * @param user         로그인 사용자 정보
-     * @param accessJwt  새로 발급된 AccessToken
-     * @param refreshJwt 새로 발급된 RefreshToken
+     * @param user 로그인한 사용자 정보
+     * @param uuid UUID
      */
-    public void createTokenInfo(LoginUserResponse user, String accessJwt, String refreshJwt) {
-        // 기존 토큰 정보 삭제
-        tokenInfoRepository.deleteAllByCustomerId(user.userId());
+    @Override
+    public void createUserInfo(LoginUserResponse user, String uuid) {
 
-        // 새로운 토큰 정보 생성
-        CreateTokenInfoRequest createRequest = CreateTokenInfoRequest.builder()
-                .uuid(jwtProvider.getUuidFromToken(accessJwt))
+        UserInfo userInfo = UserInfo.builder()
+                .uuid(uuid)
                 .customerId(user.userId())
                 .role(user.userRole())
                 .loginStateName(user.loginStatusName())
-                .refreshToken(refreshJwt)
-                .createAt(ZonedDateTime.now())
-                .updateAt(ZonedDateTime.now())
                 .build();
-
-        tokenInfoRepository.save(createRequest.toEntity());
-    }
-
-    @Override
-    public void createTokenInfoNoneMember(NoneMemberLoginRequest request, String accessJwt, String refreshJwt) {
-
-        CreateTokenInfoRequest createRequest = CreateTokenInfoRequest.builder()
-                .uuid(jwtProvider.getUuidFromToken(accessJwt))
-                .customerId(request.customerId())
-                .role(request.role())
-                .loginStateName("None-Member")
-                .refreshToken(refreshJwt)
-                .createAt(ZonedDateTime.now())
-                .updateAt(ZonedDateTime.now())
-                .build();
-        tokenInfoRepository.save(createRequest.toEntity());
+        userInfoRepository.save(userInfo);
     }
 
     /**
-     * UUID로 토큰 정보를 조회합니다.
+     * UUID로 토큰 정보와 사용자 정보를 조회합니다.
      *
      * @param uuid UUID
-     * @return 토큰 정보
+     * @return ReadTokenInfoResponse 조회된 토큰 정보와 사용자 정보
      */
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public ReadTokenInfoResponse getByUuid(String uuid) {
 
-        TokenInfo tokenInfo = tokenInfoRepository.findByUuid(uuid)
-                .orElseThrow(() -> new refreshTokenMisMatchException(
-                                ErrorStatus.toErrorStatus("해당 UUID로 Token Info를 찾을 수 없습니다.", 404, LocalDateTime.now())
-                        )
-                );
+        TokenInfo tokenInfo = getTokenInfoByUuid(uuid);
+        UserInfo userInfo = getUserInfoByUuid(uuid);
 
-        return ReadTokenInfoResponse.fromEntity(tokenInfo);
+        return ReadTokenInfoResponse.fromEntity(userInfo, tokenInfo.getRefreshToken());
     }
 
     /**
-     * 고객 ID로 토큰 정보를 조회합니다.
+     * 액세스 및 리프레시 토큰을 갱신합니다.
      *
-     * @param customerId 고객 ID
-     * @return 토큰 정보
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public ReadTokenInfoResponse getByCustomerId(Long customerId) {
-
-        TokenInfo tokenInfo = tokenInfoRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new CustomerIdMisMatchException(ErrorStatus.toErrorStatus(
-                                "해당 CustomerId를 찾을 수 없습니다.", 404, LocalDateTime.now())
-                        )
-                );
-
-        return ReadTokenInfoResponse.fromEntity(tokenInfo);
-    }
-
-    /**
-     * 토큰 정보를 업데이트합니다.
-     *
-     * @param updateRequest 토큰 정보 업데이트 요청 객체
-     */
-    @Override
-    public void updateTokenInfo(UpdateTokenInfoRequest updateRequest) {
-        tokenInfoRepository.save(updateRequest.toEntity());
-    }
-
-    /**
-     * 만료된 AccessToken을 이용하여 새로운 AccessToken으로 갱신합니다.
-     *
-     * @param createAccessTokenRequest 만료된 AccessToken 정보를 포함한 요청 객체
-     * @return 새로 발급된 AccessToken과 RefreshToken을 포함한 AuthResponse 객체
-     * @throws refreshTokenMisMatchException 토큰 정보를 찾을 수 없을 때 발생한 예외
+     * @param createAccessTokenRequest 액세스 토큰 생성 요청
+     * @return AuthResponse 갱신된 액세스 토큰과 리프레시 토큰을 포함한 응답
      */
     @Override
     public AuthResponse updateAccessToken(CreateAccessTokenRequest createAccessTokenRequest) {
 
+        TokenInfo oldTokenInfo = getTokenInfoByRefreshToken(createAccessTokenRequest.refreshToken());
 
-        TokenInfo tokenInfo = tokenInfoRepository.findByRefreshToken(createAccessTokenRequest.refreshToken())
-                .orElseThrow(() -> new refreshTokenMisMatchException(
-                                ErrorStatus.toErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())
-                        )
-                );
+        String newAccessJwt = jwtProvider.createAccessJwt();
+        String newRefreshJwt = jwtProvider.createRefreshJwt();
+        String oldUuid = oldTokenInfo.getUuid();
+        String newUuid = jwtProvider.getUuidFromToken(newAccessJwt);
 
-        String newAccessJwt = jwtUtil.createAccessJwt();
-        String newRefreshJwt = jwtUtil.createRefrshJwt();
-
-        UpdateTokenInfoRequest updateRequest = UpdateTokenInfoRequest.builder()
-                .id(tokenInfo.getId())
-                .customerId(tokenInfo.getCustomerId())
-                .uuid(jwtProvider.getUuidFromToken(newAccessJwt))
-                .role(tokenInfo.getRole())
-                .loginStateName(tokenInfo.getLoginStateName())
-                .refreshToken(newRefreshJwt)
-                .createAt(tokenInfo.getCreatedAt())
-                .updateAt(ZonedDateTime.now())
-                .build();
-        updateTokenInfo(updateRequest);
+        updateTokenInfo(oldTokenInfo, newUuid, newRefreshJwt);
+        updateUserInfo(oldUuid, newUuid);
 
         return AuthResponse.builder()
                 .accessToken(newAccessJwt)
@@ -224,23 +151,104 @@ public class TokenInfoServiceImpl implements TokenInfoService {
     }
 
     /**
-     * UUID로 토큰 정보를 삭제합니다.
+     * UUID를 사용하여 TokenInfo를 조회합니다.
      *
-     * @param uuid UUID
+     * @param uuid 조회할 TokenInfo의 UUID
+     * @return TokenInfo 조회된 토큰 정보
+     * @throws refreshTokenMisMatchException UUID에 해당하는 TokenInfo가 없을 경우 발생
      */
     @Override
-    public void removeTokenInfoByUuid(String uuid) {
-        tokenInfoRepository.deleteByUuid(uuid);
+    public TokenInfo getTokenInfoByUuid(String uuid) {
+        return tokenInfoRepository.findByUuid(uuid)
+                .orElseThrow(() -> new refreshTokenMisMatchException(
+                        ErrorStatus.toErrorStatus("해당 UUID로 Token Info를 찾을 수 없습니다.", 404, LocalDateTime.now())));
     }
 
     /**
-     * 고객 ID로 모든 토큰 정보를 삭제합니다.
+     * UUID를 사용하여 UserInfo를 조회합니다.
      *
-     * @param customerId 고객 ID
+     * @param uuid 조회할 UserInfo의 UUID
+     * @return UserInfo 조회된 사용자 정보
+     * @throws CustomerIdMisMatchException UUID에 해당하는 UserInfo가 없을 경우 발생
      */
     @Override
-    public void removeTokenAllInfoByCustomerId(Long customerId) {
-        tokenInfoRepository.deleteAllByCustomerId(customerId);
+    public UserInfo getUserInfoByUuid(String uuid) {
+        return userInfoRepository.findByUuid(uuid)
+                .orElseThrow(() -> new CustomerIdMisMatchException(
+                        ErrorStatus.toErrorStatus("해당 UUID로 User Info를 찾을 수 없습니다.", 404, LocalDateTime.now())));
+    }
+
+    /**
+     * Refresh 토큰을 사용하여 TokenInfo를 조회합니다.
+     *
+     * @param refreshToken 조회할 TokenInfo의 Refresh 토큰
+     * @return TokenInfo 조회된 토큰 정보
+     * @throws refreshTokenMisMatchException Refresh 토큰에 해당하는 TokenInfo가 없을 경우 발생
+     */
+    @Override
+    public TokenInfo getTokenInfoByRefreshToken(String refreshToken) {
+        return tokenInfoRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new refreshTokenMisMatchException(
+                        ErrorStatus.toErrorStatus("해당 refresh Token으로 기존 Token 정보를 찾을 수 없습니다.", 404, LocalDateTime.now())));
+    }
+
+    /**
+     * TokenInfo를 업데이트합니다.
+     *
+     * @param oldTokenInfo 업데이트할 기존 TokenInfo
+     * @param newUuid 새로운 UUID
+     * @param newRefreshJwt 새로운 Refresh 토큰
+     */
+    @Override
+    public void updateTokenInfo(TokenInfo oldTokenInfo, String newUuid, String newRefreshJwt) {
+
+        TokenInfo newTokenInfo = TokenInfo.builder()
+                .id(oldTokenInfo.getId())
+                .uuid(newUuid)
+                .refreshToken(newRefreshJwt)
+                .expiryDate(jwtProvider.getExpirationDateFromToken(newRefreshJwt)).build();
+        tokenInfoRepository.save(newTokenInfo);
+    }
+
+    /**
+     * UserInfo를 업데이트합니다.
+     * 기존 UserInfo를 삭제하고 새로운 UUID로 새 UserInfo를 생성합니다.
+     *
+     * @param oldUuid 기존 UserInfo의 UUID
+     * @param newUuid 새로운 UUID
+     */
+    @Override
+    public void updateUserInfo(String oldUuid, String newUuid) {
+
+        UserInfo oldUserInfo = getUserInfoByUuid(oldUuid);
+        deletionService.deleteExistingUserInfo(oldUuid);
+        UserInfo newUserInfo = UserInfo.builder()
+                .uuid(newUuid)
+                .customerId(oldUserInfo.getCustomerId())
+                .role(oldUserInfo.getRole())
+                .loginStateName(oldUserInfo.getLoginStateName())
+                .build();
+        userInfoRepository.save(newUserInfo);
+    }
+
+    /**
+     * 만료된 토큰과 관련 사용자 정보를 정리합니다.
+     * 이 메소드는 12시간마다 실행됩니다.
+     */
+    @Override
+    @Scheduled(cron = "0 0 */12 * * ?")
+    @Transactional
+    public void cleanupExpiredTokens() {
+        LocalDateTime now = LocalDateTime.now();
+        List<TokenInfo> expiredTokens = tokenInfoRepository.findAllByExpiryDateBefore(now);
+
+        for (TokenInfo tokenInfo : expiredTokens) {
+            String uuid = tokenInfo.getUuid();
+            userInfoRepository.deleteByUuid(uuid);
+            tokenInfoRepository.delete(tokenInfo);
+        }
+
+        log.info("만료된 토큰 {}개와 관련 사용자 정보를 정리했습니다.", expiredTokens.size());
     }
 
 }
