@@ -1,36 +1,18 @@
 package com.nhnacademy.yes25.application.service;
 
-import com.nhnacademy.yes25.persistance.domain.TokenInfo;
-import com.nhnacademy.yes25.persistance.domain.UserInfo;
-import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
-import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface TokenInfoService {
 
     AuthResponse doLogin(LoginUserResponse user);
 
-    void deleteExistingUserData(Long customerId);
+    void deleteExistingUserData(Long userId);
 
-    void createTokenInfo(String uuid, String refreshJwt);
+    @Transactional(readOnly = true)
+    boolean isRefreshTokenValid(String refreshToken);
 
-    void createUserInfo(LoginUserResponse user, String uuid);
-
-    ReadTokenInfoResponse getByUuid(String uuid);
-
-    AuthResponse updateAccessToken(CreateAccessTokenRequest createAccessTokenRequest);
-
-    TokenInfo getTokenInfoByUuid(String uuid);
-
-    UserInfo getUserInfoByUuid(String uuid);
-
-    TokenInfo getTokenInfoByRefreshToken(String refreshToken);
-
-    void updateTokenInfo(TokenInfo oldTokenInfo, String newUuid, String newRefreshJwt);
-
-    void updateUserInfo(String oldUuid, String newUuid);
-
-    void cleanupExpiredTokens();
-
+    AuthResponse updateAccessToken(String refreshToken,
+                                   LoginUserResponse user);
 }

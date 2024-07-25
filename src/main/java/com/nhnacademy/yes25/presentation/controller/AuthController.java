@@ -2,7 +2,7 @@ package com.nhnacademy.yes25.presentation.controller;
 
 import com.nhnacademy.yes25.application.service.TokenInfoService;
 import com.nhnacademy.yes25.application.service.UserService;
-import com.nhnacademy.yes25.presentation.dto.request.CreateAccessTokenRequest;
+import com.nhnacademy.yes25.common.jwt.JwtProvider;
 import com.nhnacademy.yes25.presentation.dto.request.LoginUserRequest;
 import com.nhnacademy.yes25.presentation.dto.response.AuthResponse;
 import com.nhnacademy.yes25.presentation.dto.response.LoginUserResponse;
@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.nhnacademy.yes25.presentation.dto.response.ReadTokenInfoResponse;
 
 /**
  * AuthController 클래스는 사용자 인증 및 로그인 기능을 제공하는 REST API 엔드포인트를 담당합니다.
@@ -32,6 +31,7 @@ public class AuthController {
 
     private final UserService userService;
     private final TokenInfoService tokenInfoService;
+    private final JwtProvider jwtProvider;
 
     /**
      * 사용자를 인증하고 인증된 사용자에 대한 JSON Web Token(JWT)을 생성합니다.
@@ -69,10 +69,12 @@ public class AuthController {
      */
     @Operation(summary = "access token 재발급", description = "access token 재발급 후 Header에 재발급된 토큰을 담아 반환합니다.")
     @GetMapping("/refresh")
-    public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader("Refresh-Token") String refreshToken) {
+    public ResponseEntity<AuthResponse> tokenRefresh(@RequestHeader(HttpHeaders.AUTHORIZATION) String accessHeader,
+                                                     @RequestHeader("Refresh-Token") String refreshToken) {
 
-        CreateAccessTokenRequest createAccessTokenRequest = new CreateAccessTokenRequest(refreshToken);
-        AuthResponse authResponse = tokenInfoService.updateAccessToken(createAccessTokenRequest);
+        String accessToken = jwtProvider.extractTokenFromHeader(accessHeader);
+        LoginUserResponse user = jwtProvider.getLoginUserFromToken(accessToken);
+        AuthResponse authResponse = tokenInfoService.updateAccessToken(refreshToken, user);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + authResponse.accessToken())
@@ -80,15 +82,4 @@ public class AuthController {
                 .body(authResponse);
     }
 
-    /**
-     * 토큰의 UUID를 이용하여 회원 정보를 조회합니다.
-     *
-     * @param uuid 토큰의 UUID
-     * @return ReadTokenInfoResponse 조회된 회원 정보
-     */
-    @GetMapping("/info")
-    @Operation(summary = "토큰 회원 정보", description = "토큰 sub를 이용하여 회원 정보를 반환합니다.")
-    public ReadTokenInfoResponse getUserInfo(@RequestParam String uuid) {
-        return tokenInfoService.getByUuid(uuid);
-    }
 }
