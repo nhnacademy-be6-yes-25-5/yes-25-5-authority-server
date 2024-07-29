@@ -6,6 +6,9 @@ import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 @Configuration
 public class RedisConfig {
@@ -31,5 +34,20 @@ public class RedisConfig {
             .setDatabase(redisDatabase);
 
         return Redisson.create(config);
+    }
+
+    @Bean
+    public RedisConnectionFactory lettuceConnectionFactory() {
+        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisHost, redisPort);
+        lettuceConnectionFactory.setPassword(redisPassword);
+        lettuceConnectionFactory.setDatabase(41);  // database 41 사용
+        return lettuceConnectionFactory;
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate() {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(lettuceConnectionFactory());
+        return template;
     }
 }
